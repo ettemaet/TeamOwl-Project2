@@ -1,4 +1,4 @@
-package edu.msu.stanospa.teamgoldfinch_project1;
+package edu.msu.stanospa.teamowl_project2;
 
 import android.content.Context;
 import android.graphics.Canvas;
