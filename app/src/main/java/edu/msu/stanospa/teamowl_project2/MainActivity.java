@@ -37,15 +37,9 @@ public class MainActivity extends ActionBarActivity {
 
         }).start();
 
-
-        //game.setPlayerNames(name1, name2);
-
-        //Bundle bundle = new Bundle();
-        //game.saveInstanceState(bundle, this);
-
-        //Intent intent = new Intent(this, SelectionActivity.class);
-        //intent.putExtras(bundle);
-        //startActivity(intent);
+        // Put this in an if block
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void onCreateNewUser(View view) {

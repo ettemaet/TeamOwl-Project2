@@ -56,5 +56,8 @@ public class CreateUserActivity extends ActionBarActivity {
             }
 
         }).start();
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
