@@ -123,5 +123,69 @@ public class Cloud {
         }
     }
 
+    public String LogOnCloud(final String UserId, final String PassWord, final String PawwWord1) {
+
+        HttpClient httpClient = new DefaultHttpClient();
+
+        HttpPost httpPost = new HttpPost(REGISTER_URL);
+
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
+        nameValuePair.add(new BasicNameValuePair("user", UserId));
+        nameValuePair.add(new BasicNameValuePair("pw", PassWord));
+        nameValuePair.add(new BasicNameValuePair("pw1", PassWord));
+
+        //Encoding POST data
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String responseString = " ";
+        try {
+            HttpResponse response = httpClient.execute(httpPost);
+            // write response to log
+            HttpEntity responseEntity = response.getEntity();
+            if(responseEntity != null) {
+                responseString = EntityUtils.toString(responseEntity);
+            }
+            Log.i("return string",responseString);
+            //Log.d("Http Post Response:", response.toString());
+        } catch (ClientProtocolException e) {
+            // Log exception
+            e.printStackTrace();
+        } catch (IOException e) {
+            // Log exception
+            e.printStackTrace();
+        }
+
+        /**
+         * Create an XML parser for the result
+         */
+        try {
+            XmlPullParser xml = Xml.newPullParser();
+            xml.setInput(new StringReader(responseString));
+
+            xml.nextTag();      // Advance to first tag
+            xml.require(XmlPullParser.START_TAG, null, "register");
+
+            String status = xml.getAttributeValue(null, "status");
+            if(status.equals("no")) {
+                return xml.getAttributeValue(null, "msg");
+            } else if ( status.equals("yes")){
+                return "yes";
+            }
+            return null;
+
+
+            // We are done
+        } catch(XmlPullParserException ex) {
+            return null;
+        } catch(IOException ex) {
+            return null;
+        }
+
+    }
+
 
 }
