@@ -34,5 +34,7 @@
     <string name="title_activity_create_user">CreateUserActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_dummy">DummyActivity</string>
+    <string name="dummy_text">This is the Dummy Activity</string>
 
 </resources>

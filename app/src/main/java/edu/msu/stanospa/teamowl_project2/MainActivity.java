@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -19,13 +20,13 @@ public class MainActivity extends ActionBarActivity {
         game = new Game(this);
     }
 
-    public void onLogin(View view) {
+    public void onLogin(final View view) {
 
         // Need to code to verify login credentials
 
-
         final String username = ((EditText)findViewById(R.id.editUsername)).getText().toString();
         final String password = ((EditText)findViewById(R.id.editPassword)).getText().toString();
+
 
 
         new Thread(new Runnable() {
@@ -33,13 +34,27 @@ public class MainActivity extends ActionBarActivity {
             public void run() {
                     Cloud cloud = new Cloud();
                     final String test = cloud.LogOnCloud(username, password);
+
+                    view.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            String[] ParsedTest = test.split(",");
+                            if(ParsedTest[0].equals("yes") ){
+                                Toast.makeText(view.getContext(), "Successful Login", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getBaseContext(), DummyActivity.class);
+                                startActivity(intent);
+                            }
+                            else if (ParsedTest[1]!= null) {
+                                Toast.makeText(view.getContext(), ParsedTest[1], Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
                 }
 
         }).start();
 
-        // Put this in an if block
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+
     }
 
     public void onCreateNewUser(View view) {

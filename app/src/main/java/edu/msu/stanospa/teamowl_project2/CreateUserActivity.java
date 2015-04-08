@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import edu.msu.stanospa.teamowl_project2.R;
 
@@ -41,7 +42,7 @@ public class CreateUserActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onCreateUser(View view) {
+    public void onCreateUser(final View view) {
         // Code to create a new user
         final String username = ((EditText)findViewById(R.id.editUsername)).getText().toString();
         final String password = ((EditText)findViewById(R.id.editPassword)).getText().toString();
@@ -53,11 +54,27 @@ public class CreateUserActivity extends ActionBarActivity {
             public void run() {
                 Cloud cloud = new Cloud();
                 final String test = cloud.CreateOnCloud(username, password, password1);
+
+                view.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        String[] ParsedTest = test.split(",");
+                        if(ParsedTest[0].equals("yes") ){
+                            Toast.makeText(view.getContext(), "Successfully Registered", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                            startActivity(intent);
+                        }
+                        else if (ParsedTest[1]!= null) {
+                            Toast.makeText(view.getContext(), ParsedTest[1], Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
             }
 
         }).start();
 
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+
     }
 }
