@@ -123,7 +123,7 @@ public class Cloud {
         }
     }
 
-    public String LogOnCloud(final String UserId, final String PassWord, final String PawwWord1) {
+    public String CreateOnCloud(final String UserId, final String PassWord, final String PassWord1) {
 
         HttpClient httpClient = new DefaultHttpClient();
 
@@ -132,7 +132,7 @@ public class Cloud {
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
         nameValuePair.add(new BasicNameValuePair("user", UserId));
         nameValuePair.add(new BasicNameValuePair("pw", PassWord));
-        nameValuePair.add(new BasicNameValuePair("pw1", PassWord));
+        nameValuePair.add(new BasicNameValuePair("pw1", PassWord1));
 
         //Encoding POST data
         try {

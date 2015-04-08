@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import edu.msu.stanospa.teamowl_project2.R;
 
@@ -42,5 +43,18 @@ public class CreateUserActivity extends ActionBarActivity {
 
     public void onCreateUser(View view) {
         // Code to create a new user
+        final String username = ((EditText)findViewById(R.id.editUsername)).getText().toString();
+        final String password = ((EditText)findViewById(R.id.editPassword)).getText().toString();
+        final String password1 = ((EditText)findViewById(R.id.editPasswordAgain)).getText().toString();
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Cloud cloud = new Cloud();
+                final String test = cloud.CreateOnCloud(username, password, password1);
+            }
+
+        }).start();
     }
 }
