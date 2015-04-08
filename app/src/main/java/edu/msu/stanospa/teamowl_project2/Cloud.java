@@ -64,7 +64,7 @@ public class Cloud {
 
         HttpClient httpClient = new DefaultHttpClient();
 
-        HttpPost httpPost = new HttpPost("http://www.example.com");
+        HttpPost httpPost = new HttpPost(LOGIN_URL);
 
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
         nameValuePair.add(new BasicNameValuePair("user", UserId));
@@ -82,6 +82,7 @@ public class Cloud {
             HttpResponse response = httpClient.execute(httpPost);
             // write response to log
             responseString = response.toString();
+            Log.i("return string",responseString);
             //Log.d("Http Post Response:", response.toString());
         } catch (ClientProtocolException e) {
             // Log exception

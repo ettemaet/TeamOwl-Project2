@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -22,8 +23,20 @@ public class MainActivity extends ActionBarActivity {
 
         // Need to code to verify login credentials
 
-        //String name1 = ((EditText)findViewById(R.id.player1Name)).getText().toString();
-        //String name2 = ((EditText)findViewById(R.id.player2Name)).getText().toString();
+
+        final String username = ((EditText)findViewById(R.id.editUsername)).getText().toString();
+        final String password = ((EditText)findViewById(R.id.editPassword)).getText().toString();
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                    Cloud cloud = new Cloud();
+                    final String test = cloud.LogOnCloud(username, password);
+                }
+
+        }).start();
+
 
         //game.setPlayerNames(name1, name2);
 
