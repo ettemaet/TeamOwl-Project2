@@ -109,17 +109,17 @@ public class Cloud {
 
             String status = xml.getAttributeValue(null, "status");
             if(status.equals("no")) {
-                return null;
+                return "no," + xml.getAttributeValue(null, "msg");
             }
 
-            return xml.getAttributeValue(null, "id");
+            return "yes,"+xml.getAttributeValue(null, "id");
 
 
             // We are done
         } catch(XmlPullParserException ex) {
-            return null;
+            return "no,XmlPullParserException";
         } catch(IOException ex) {
-            return null;
+            return "no,IOException";
         }
     }
 
@@ -171,18 +171,18 @@ public class Cloud {
 
             String status = xml.getAttributeValue(null, "status");
             if(status.equals("no")) {
-                return xml.getAttributeValue(null, "msg");
+                return "no,"+xml.getAttributeValue(null, "msg");
             } else if ( status.equals("yes")){
-                return "yes";
+                return "yes,register successful";
             }
             return null;
 
 
             // We are done
         } catch(XmlPullParserException ex) {
-            return null;
+            return "no,XmlPullParserException";
         } catch(IOException ex) {
-            return null;
+            return "no,IOException";
         }
 
     }
