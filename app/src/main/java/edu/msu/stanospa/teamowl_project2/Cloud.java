@@ -3,6 +3,7 @@ package edu.msu.stanospa.teamowl_project2;
 import android.util.Log;
 import android.util.Xml;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -11,6 +12,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -81,7 +83,10 @@ public class Cloud {
         try {
             HttpResponse response = httpClient.execute(httpPost);
             // write response to log
-            responseString = response.toString();
+            HttpEntity responseEntity = response.getEntity();
+            if(responseEntity != null) {
+                responseString = EntityUtils.toString(responseEntity);
+            }
             Log.i("return string",responseString);
             //Log.d("Http Post Response:", response.toString());
         } catch (ClientProtocolException e) {
