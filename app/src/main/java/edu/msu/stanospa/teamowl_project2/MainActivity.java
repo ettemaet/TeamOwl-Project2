@@ -18,27 +18,25 @@ public class MainActivity extends ActionBarActivity {
         game = new Game(this);
     }
 
-    public void onStartGame(View view) {
-        String name1 = ((EditText)findViewById(R.id.player1Name)).getText().toString();
-        String name2 = ((EditText)findViewById(R.id.player2Name)).getText().toString();
+    public void onLogin(View view) {
 
-        game.setPlayerNames(name1, name2);
+        // Need to code to verify login credentials
 
-        Bundle bundle = new Bundle();
-        game.saveInstanceState(bundle, this);
+        //String name1 = ((EditText)findViewById(R.id.player1Name)).getText().toString();
+        //String name2 = ((EditText)findViewById(R.id.player2Name)).getText().toString();
 
-        Intent intent = new Intent(this, SelectionActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        //game.setPlayerNames(name1, name2);
+
+        //Bundle bundle = new Bundle();
+        //game.saveInstanceState(bundle, this);
+
+        //Intent intent = new Intent(this, SelectionActivity.class);
+        //intent.putExtras(bundle);
+        //startActivity(intent);
     }
 
-    public void onViewInstructions(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-
-        builder.setTitle(R.string.instructions_title);
-        builder.setMessage(R.string.instructions_text);
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
+    public void onCreateNewUser(View view) {
+        Intent intent = new Intent(this, CreateUserActivity.class);
+        startActivity(intent);
     }
 }

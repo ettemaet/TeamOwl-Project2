@@ -27,5 +27,12 @@
     <string name="remember_me">Remember</string>
     <string name="login_button">Login</string>
     <string name="create_new_user">Create New User</string>
+    <string name="create_new_user_string">Create New User</string>
+    <string name="enter_username">Enter Username:</string>
+    <string name="enter_password">Enter Password:</string>
+    <string name="re_enter_password">Re-Enter Password:</string>
+    <string name="title_activity_create_user">CreateUserActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

@@ -78,7 +78,8 @@
         android:id="@+id/buttonLogin"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/textWelcome"
-        android:layout_alignStart="@+id/textWelcome" />
+        android:layout_alignStart="@+id/textWelcome"
+        android:onClick="onLogin" />
 
     <Button
         android:layout_width="wrap_content"
@@ -87,5 +88,6 @@
         android:id="@+id/buttonCreateNew"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/buttonLogin"
-        android:layout_toEndOf="@+id/buttonLogin" />
+        android:layout_toEndOf="@+id/buttonLogin"
+        android:onClick="onCreateNewUser" />
 </RelativeLayout>
