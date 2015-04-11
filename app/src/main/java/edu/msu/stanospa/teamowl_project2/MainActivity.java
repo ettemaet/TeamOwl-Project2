@@ -41,7 +41,8 @@ public class MainActivity extends ActionBarActivity {
                             String[] ParsedTest = test.split(",");
                             if(ParsedTest[0].equals("yes") ){
                                 Toast.makeText(view.getContext(), "Successful Login", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getBaseContext(), DummyActivity.class);
+                                Intent intent = new Intent(getBaseContext(), WaitingActivity.class);
+                                intent.putExtra("username", username);
                                 startActivity(intent);
                             }
                             else if (ParsedTest[1]!= null) {
