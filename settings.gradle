@@ -1,0 +1,2 @@
+include ':Team-Owl-Project2'
+project(':Team-Owl-Project2').projectDir = new File('app')
