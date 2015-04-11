@@ -69,7 +69,9 @@
         android:id="@+id/checkRemember"
         android:layout_below="@+id/textPassword"
         android:layout_alignRight="@+id/welcomeView"
-        android:layout_alignEnd="@+id/welcomeView" />
+        android:layout_alignEnd="@+id/welcomeView"
+        android:nestedScrollingEnabled="false"
+        android:onClick="onCheckboxClicked" />
 
     <Button
         android:layout_width="wrap_content"

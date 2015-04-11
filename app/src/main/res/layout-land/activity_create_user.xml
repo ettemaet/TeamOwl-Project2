@@ -18,10 +18,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/enter_username"
         android:id="@+id/textUsername"
-        android:layout_marginTop="30dp"
         android:layout_below="@+id/textCreateUser"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp" />
 
     <TextView
         android:layout_width="wrap_content"

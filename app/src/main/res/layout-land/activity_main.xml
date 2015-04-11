@@ -58,9 +58,11 @@
         android:id="@+id/welcomeView"
         android:src="@drawable/parrot"
         android:contentDescription="@string/parrot_accessibility"
-        android:layout_below="@+id/textWelcome"
-        android:layout_toRightOf="@+id/buttonLogin"
-        android:layout_toEndOf="@+id/buttonLogin" />
+        android:layout_above="@+id/editUsername"
+        android:layout_toRightOf="@+id/buttonCreateNew"
+        android:layout_toEndOf="@+id/buttonCreateNew"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="49dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -69,7 +71,8 @@
         android:id="@+id/checkRemember"
         android:layout_below="@+id/editPassword"
         android:layout_toRightOf="@+id/textPassword"
-        android:layout_toEndOf="@+id/textPassword" />
+        android:layout_toEndOf="@+id/textPassword"
+        android:onClick="onCheckboxClicked" />
 
     <Button
         android:layout_width="wrap_content"
