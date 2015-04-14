@@ -252,7 +252,7 @@ public class Cloud {
         }
 
     }
-
+//sync the file
     public String GetCurTurn(String gameid)
     {
         HttpClient httpClient = new DefaultHttpClient();
