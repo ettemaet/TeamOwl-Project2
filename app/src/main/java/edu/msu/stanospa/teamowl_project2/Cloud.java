@@ -253,5 +253,80 @@ public class Cloud {
 
     }
 
+    public boolean PlaceBirdCloud(String gameid,String turnnum,int birdid,float x, float y, boolean gameover)
+    {
+        HttpClient httpClient = new DefaultHttpClient();
+
+        HttpPost httpPost = new HttpPost(FINDGAME_URL);
+
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+        nameValuePair.add(new BasicNameValuePair("gameid", gameid));
+        nameValuePair.add(new BasicNameValuePair("turnnum", turnnum));
+        nameValuePair.add(new BasicNameValuePair("birdid", Integer.toString(birdid)));
+        nameValuePair.add(new BasicNameValuePair("x", Float.toString(x)));
+        nameValuePair.add(new BasicNameValuePair("y", Float.toString(y)));
+        int gameoverI = -1;
+        if(gameover)
+        {
+            gameoverI = 1;
+        }
+        else
+        {
+            gameoverI = 0;
+        }
+        nameValuePair.add(new BasicNameValuePair("gameover", Integer.toString(gameoverI)));
+
+        //Encoding POST data
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String responseString = " ";
+        try {
+            HttpResponse response = httpClient.execute(httpPost);
+            // write response to log
+            HttpEntity responseEntity = response.getEntity();
+            if(responseEntity != null) {
+                responseString = EntityUtils.toString(responseEntity);
+            }
+            Log.i("return string",responseString);
+            //Log.d("Http Post Response:", response.toString());
+        } catch (ClientProtocolException e) {
+            // Log exception
+            e.printStackTrace();
+        } catch (IOException e) {
+            // Log exception
+            e.printStackTrace();
+        }
+
+        /**
+         * Create an XML parser for the result
+         */
+        try {
+            XmlPullParser xml = Xml.newPullParser();
+            xml.setInput(new StringReader(responseString));
+
+            xml.nextTag();      // Advance to first tag
+            xml.require(XmlPullParser.START_TAG, null, "place");
+
+            String status = xml.getAttributeValue(null, "status");
+            if(status.equals("ok"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            // We are done
+        } catch(XmlPullParserException ex) {
+            return false;
+        } catch(IOException ex) {
+            return false;
+        }
+    }
+
 
 }
