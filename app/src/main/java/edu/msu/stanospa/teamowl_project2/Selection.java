@@ -185,6 +185,7 @@ public class Selection {
                 return true;
             }
         }
+        touchedBird = null;
         return false;
     }
 

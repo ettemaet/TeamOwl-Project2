@@ -184,13 +184,13 @@ public class Cloud {
 
     }
 
-    public String isPlayerWaiting(String username){
+    public String isPlayerWaiting(String userid){
         HttpClient httpClient = new DefaultHttpClient();
 
         HttpPost httpPost = new HttpPost(FINDGAME_URL);
 
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
-        nameValuePair.add(new BasicNameValuePair("username", username));
+        nameValuePair.add(new BasicNameValuePair("userid", userid));
 
         //Encoding POST data
         try {
@@ -225,13 +225,21 @@ public class Cloud {
             xml.setInput(new StringReader(responseString));
 
             xml.nextTag();      // Advance to first tag
-            xml.require(XmlPullParser.START_TAG, null, "gamestate");
+            xml.require(XmlPullParser.START_TAG, null, "findgame");
 
             String status = xml.getAttributeValue(null, "status");
-            if(status.equals("no")) {
-                return "no,"+xml.getAttributeValue(null, "msg");
-            } else if ( status.equals("yes")){
-                return "yes,register successful";
+            if(status.equals("create")) {
+                return "yes,create," + xml.getAttributeValue(null, "gameid") ;
+            } else if ( status.equals("found")){
+                // Player 2 joins and finds a game
+                return "yes,found";
+            } else if (status.equals("ready")) {
+                // Player 1 waiting has finally found a game
+                return "yes,ready";
+            } else if (status.equals("waiting")) {
+                return "yes,waiting";
+            } else if (status.equals("error")) {
+                return "no," +xml.getAttributeValue(null, "msg");
             }
             return null;
 

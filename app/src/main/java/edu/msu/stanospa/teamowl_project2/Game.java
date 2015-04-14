@@ -65,12 +65,12 @@ public class Game implements Serializable {
     /**
      * The first player in the game
      */
-    private Player player1;
+    private Player player1 = null;
 
     /**
      * The second player in the game
      */
-    private Player player2;
+    private Player player2 = null;
 
     /**
      * The player that won the game
@@ -201,6 +201,20 @@ public class Game implements Serializable {
         player2 = new Player(name2);
 
         state = GameState.birdSelection;
+    }
+
+    public void setPlayer1Name(String name) {
+        player1 = new Player(name);
+        state = GameState.birdSelection;
+    }
+
+    public void setPlayer2Name(String name) {
+        player2 = new Player(name);
+        state = GameState.birdSelection;
+    }
+
+    public boolean getPlayer1() {
+        return !(player1==null);
     }
 
     /**

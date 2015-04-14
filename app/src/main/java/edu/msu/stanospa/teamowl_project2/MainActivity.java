@@ -81,7 +81,14 @@ public class MainActivity extends ActionBarActivity {
                             if(ParsedTest[0].equals("yes") ){
                                 Toast.makeText(view.getContext(), "Successful Login", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getBaseContext(), WaitingActivity.class);
-                                intent.putExtra("username", username);
+
+                                if (game.getPlayer1() == false) game.setPlayer1Name(username);
+                                else game.setPlayer2Name(username);
+
+                                Bundle bundle = new Bundle();
+                                game.saveInstanceState(bundle, getBaseContext());
+                                intent.putExtras(bundle);
+                                intent.putExtra("userid", ParsedTest[1]);
                                 startActivity(intent);
                             }
                             else if (ParsedTest[1]!= null) {

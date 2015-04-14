@@ -21,8 +21,6 @@ public class SelectionActivity extends ActionBarActivity {
 
     private Toast noBirdToast;
 
-    private Toast birdSelectedToast;
-
     @Override
     protected void onSaveInstanceState(Bundle bundle) {
         super.onSaveInstanceState(bundle);
@@ -51,7 +49,7 @@ public class SelectionActivity extends ActionBarActivity {
         CharSequence noBirdText = "Please select a bird!";
         int duration = Toast.LENGTH_SHORT;
 
-        //noBirdToast = Toast.makeText(context, noBirdText, duration);
+        noBirdToast = Toast.makeText(context, noBirdText, duration);
         TextView v = (TextView) noBirdToast.getView().findViewById(android.R.id.message);
         v.setTextColor(Color.RED);
 
