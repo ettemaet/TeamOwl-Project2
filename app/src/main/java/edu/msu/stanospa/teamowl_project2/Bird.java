@@ -72,6 +72,7 @@ public class Bird implements Serializable {
         //bird.move()
         rect = new Rect();
         setRect();
+        cloud = new Cloud();
     }
 
     public Bird(Bird copy) {
@@ -84,6 +85,7 @@ public class Bird implements Serializable {
 
         rect = new Rect();
         setRect();
+        cloud = new Cloud();
     }
 
     public void reloadBitmap(Context context) {
