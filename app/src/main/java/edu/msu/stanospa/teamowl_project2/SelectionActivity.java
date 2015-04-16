@@ -64,7 +64,7 @@ public class SelectionActivity extends ActionBarActivity {
      * set the text at the top of the selection screen to the appropriate player
      */
     private void setPlayerSelectionText() {
-        selectionText.setText(game.getCurrentPlayerName() + " " + getString(R.string.player_select));
+        selectionText.setText(game.getLocalPlayerName() + " " + getString(R.string.player_select));
     }
 
     public void onConfirmSelection(View view) {
@@ -72,6 +72,13 @@ public class SelectionActivity extends ActionBarActivity {
         game.saveInstanceState(bundle, this);
 
         if (selectionView.isSelected()) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            });
+            Cloud cloud = new Cloud();
             selectionView.setPlayerSelection(game);
 
             if (!game.inSelectionState()){

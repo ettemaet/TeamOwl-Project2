@@ -29,6 +29,8 @@ public class Cloud {
     private static final String REGISTER_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/register.php";
     private static final String LOGIN_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/login.php";
     private static final String FINDGAME_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/findgame.php";
+    private static final String PLACEBIRD_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/placebird.php";
+    private static final String GETTURNID_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/getturnid.php";
     private static final String UTF8 = "UTF-8";
 
     /**
@@ -235,7 +237,7 @@ public class Cloud {
                 return "yes,found";
             } else if (status.equals("ready")) {
                 // Player 1 waiting has finally found a game
-                return "yes,ready";
+                return "yes,ready," + xml.getAttributeValue(null, "gameid");
             } else if (status.equals("waiting")) {
                 return "yes,waiting";
             } else if (status.equals("error")) {
@@ -252,12 +254,12 @@ public class Cloud {
         }
 
     }
-//sync the file
+
     public String GetCurTurn(String gameid)
     {
         HttpClient httpClient = new DefaultHttpClient();
 
-        HttpPost httpPost = new HttpPost(FINDGAME_URL);
+        HttpPost httpPost = new HttpPost(GETTURNID_URL);
 
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
@@ -381,7 +383,7 @@ public class Cloud {
     {
         HttpClient httpClient = new DefaultHttpClient();
 
-        HttpPost httpPost = new HttpPost(FINDGAME_URL);
+        HttpPost httpPost = new HttpPost(PLACEBIRD_URL);
 
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));

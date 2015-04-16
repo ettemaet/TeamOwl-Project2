@@ -16,6 +16,7 @@ public class WaitingActivity extends ActionBarActivity {
 
     private Game game;
     String Userid;
+    String Username;
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -30,6 +31,7 @@ public class WaitingActivity extends ActionBarActivity {
         Intent intent = getIntent();
 
         Userid = intent.getStringExtra("userid");
+        Username = intent.getStringExtra("username");
 
         isGameReady();
     }
@@ -78,8 +80,22 @@ public class WaitingActivity extends ActionBarActivity {
                     //game.saveInstanceState(bundle, getBaseContext());
 
                     if (playerWaiting[0].equals("yes")) {
-                        if (playerWaiting[1].equals("found") || playerWaiting[1].equals("ready")) {
+                        if (playerWaiting[1].equals("found")) {
+                            // Player 2 joined
                             running = false;
+                            game.setLocalPlayer(Username);
+                            //game.setPlayer2Name(Username);
+                            game.saveInstanceState(bundle, getBaseContext());
+                            Intent selection = new Intent(getBaseContext(), SelectionActivity.class);
+                            selection.putExtras(bundle);
+                            startActivity(selection);
+                        } else if (playerWaiting[1].equals("ready")) {
+                            // Player 1 created game
+                            running = false;
+                            //game.setPlayer1Name(Username);
+                            game.setLocalPlayer(Username);
+                            game.setGameId(playerWaiting[2]);
+                            game.saveInstanceState(bundle, getBaseContext());
                             Intent selection = new Intent(getBaseContext(), SelectionActivity.class);
                             selection.putExtras(bundle);
                             startActivity(selection);
@@ -92,6 +108,8 @@ public class WaitingActivity extends ActionBarActivity {
                                     waitingText.setText(R.string.waiting_for_player);
                                 }
                             });
+                            game.setGameId(playerWaiting[2]);
+                            game.saveInstanceState(bundle, getBaseContext());
                             //checkWaitingStatus();
                         } else if (playerWaiting[1].equals("waiting")) {
                             // Waiting

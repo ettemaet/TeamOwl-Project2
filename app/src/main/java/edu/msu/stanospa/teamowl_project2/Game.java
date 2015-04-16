@@ -73,6 +73,11 @@ public class Game implements Serializable {
     private Player player2 = null;
 
     /**
+     * Local player
+     */
+
+    private Player localPlayer = null;
+    /**
      * The player that won the game
      */
     private Player winner;
@@ -106,6 +111,16 @@ public class Game implements Serializable {
      * The current stage of the game
      */
     private GameState state = GameState.birdSelection;
+
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
+    }
+
+    /**
+     * Current game ID
+     */
+    private String gameId;
+
 
     /**
      * @param context the current context
@@ -223,9 +238,11 @@ public class Game implements Serializable {
      */
     public void setPlayerSelection(Bird selection) {
         Bird copyOfSelected = new Bird(selection);
-        getCurrentPlayer().setSelectedBird(copyOfSelected);
+        //getCurrentPlayer().setSelectedBird(copyOfSelected);
 
-        advanceTurn();
+        //Changed ^ for project 2
+        localPlayer.setSelectedBird(copyOfSelected);
+        //advanceTurn();
     }
 
     /**
@@ -242,7 +259,7 @@ public class Game implements Serializable {
 
         birds.add(getCurrentPlayer().getSelectedBird());
 
-        advanceTurn();
+        //advanceTurn();
     }
 
     /**
@@ -254,12 +271,20 @@ public class Game implements Serializable {
         state = GameState.gameOver;
     }
 
+    public void setLocalPlayer(String name) {
+        localPlayer = new Player(name);
+    }
+
+    public String getLocalPlayerName() {
+        return localPlayer.getName();
+    }
+
     /**
      * Gets the current player's name
      * @return the player's name
      */
     public String getCurrentPlayerName() {
-        return getCurrentPlayer().getName();
+        return localPlayer.getName();
     }
 
     /**
