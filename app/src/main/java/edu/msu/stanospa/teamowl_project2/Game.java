@@ -135,7 +135,6 @@ public class Game implements Serializable {
      */
     private String gameId;
 
-    private Cloud cloud;
 
 
     /**
@@ -275,7 +274,14 @@ public class Game implements Serializable {
         }
 
         birds.add(localPlayer.getSelectedBird());
-        localPlayer.getSelectedBird().saveToCloud(gameId,Integer.toString(localTurn));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Cloud cloud = new Cloud();
+                localPlayer.getSelectedBird().saveToCloud(cloud, gameId, Integer.toString(localTurn));
+            }
+        }).start();
+
 
         //advanceTurn();
     }
