@@ -84,6 +84,7 @@ public class WaitingActivity extends ActionBarActivity {
                             // Player 2 joined
                             running = false;
                             game.setLocalPlayer(Username);
+                            game.setPlayerOne(false);
                             //game.setPlayer2Name(Username);
                             game.saveInstanceState(bundle, getBaseContext());
                             Intent selection = new Intent(getBaseContext(), SelectionActivity.class);
@@ -108,6 +109,7 @@ public class WaitingActivity extends ActionBarActivity {
                                     waitingText.setText(R.string.waiting_for_player);
                                 }
                             });
+                            game.setPlayerOne(true);
                             game.setGameId(playerWaiting[2]);
                             game.saveInstanceState(bundle, getBaseContext());
                             //checkWaitingStatus();

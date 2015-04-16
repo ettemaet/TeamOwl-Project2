@@ -94,6 +94,14 @@ public class Game implements Serializable {
 
     private int localTurn = 0;
 
+    public boolean isPlayerOne() {
+        return isPlayerOne;
+    }
+
+    public void setPlayerOne(boolean isPlayerOne) {
+        this.isPlayerOne = isPlayerOne;
+    }
+
     private boolean isPlayerOne = true;
 
     /**
@@ -126,6 +134,8 @@ public class Game implements Serializable {
      * Current game ID
      */
     private String gameId;
+
+    private Cloud cloud;
 
 
     /**
@@ -263,7 +273,8 @@ public class Game implements Serializable {
             }
         }
 
-        birds.add(getCurrentPlayer().getSelectedBird());
+        birds.add(localPlayer.getSelectedBird());
+        localPlayer.getSelectedBird().saveToCloud(gameId,Integer.toString(localTurn));
 
         //advanceTurn();
     }

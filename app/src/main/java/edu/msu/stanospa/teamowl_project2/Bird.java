@@ -58,6 +58,8 @@ public class Bird implements Serializable {
      */
     private float y;
 
+    private Cloud cloud;
+
 
     public Bird(Context context, int id, float relX, float relY) {
         this.id = id;
@@ -179,6 +181,10 @@ public class Bird implements Serializable {
         //canvas.translate(-bird.getWidth() / 2, -bird.getHeight() / 2);
         canvas.drawBitmap(bird, 0, 0, null);
         canvas.restore();
+    }
+
+    public void saveToCloud(String gameid,String turn) {
+        cloud.PlaceBirdCloud(gameid,turn,id,x,y,false);
     }
 
 
