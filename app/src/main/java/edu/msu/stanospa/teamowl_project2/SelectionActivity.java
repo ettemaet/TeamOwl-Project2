@@ -60,7 +60,7 @@ public class SelectionActivity extends ActionBarActivity {
         this.selectionText = (TextView) findViewById(R.id.playerNameLabel);
         setPlayerSelectionText();
 
-        Context context = getApplicationContext();
+        final Context context = getApplicationContext();
         CharSequence noBirdText = "Please select a bird!";
         int duration = Toast.LENGTH_SHORT;
 
@@ -82,6 +82,7 @@ public class SelectionActivity extends ActionBarActivity {
                     if ((cloud.isMyTurn(game.getGameId(), Integer.toString(player))) && birdSelected) {
                         Log.i("BIRD SELECTED IF: ", " Value" + birdSelected);
                         stillMyTurn = false;
+                        game.saveInstanceState(newBundle, context);
                         Intent intent = new Intent(getBaseContext(), GameActivity.class);
                         intent.putExtras(newBundle);
                         startActivity(intent);
