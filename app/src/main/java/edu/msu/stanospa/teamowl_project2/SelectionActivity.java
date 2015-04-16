@@ -72,7 +72,7 @@ public class SelectionActivity extends ActionBarActivity {
         } else { player = 2; }
 
         final Bundle newBundle = new Bundle();
-        game.saveInstanceState(bundle, this);
+        //game.saveInstanceState(bundle, this);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -127,7 +127,13 @@ public class SelectionActivity extends ActionBarActivity {
 
 
     private void changeToWaitingText() {
-        selectionText.setText(R.string.selection_waiting_title);
+        selectionText.post(new Runnable() {
+            @Override
+            public void run() {
+                selectionText.setText(R.string.selection_waiting_title);
+            }
+        });
+        //selectionText.setText(R.string.selection_waiting_title);
     }
 
     /**
