@@ -34,7 +34,7 @@ public class GameView extends View {
     }
 
     private void init(AttributeSet attrs, int defStyle) {
-
+        game = new Game(getContext());
     }
 
     public Game getGame() {
