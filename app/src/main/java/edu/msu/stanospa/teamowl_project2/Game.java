@@ -120,6 +120,8 @@ public class Game implements Serializable {
         this.gameId = gameId;
     }
 
+    public String getGameId() { return this.gameId; }
+
     /**
      * Current game ID
      */

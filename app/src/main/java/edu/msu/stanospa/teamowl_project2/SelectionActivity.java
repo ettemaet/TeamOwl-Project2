@@ -96,4 +96,20 @@ public class SelectionActivity extends ActionBarActivity {
         }
     }
 
+    public int checkPlayerTurn(Cloud cloud) {
+        String result = cloud.GetCurTurn(game.getGameId());
+        String[] parsed = new String[3];
+        parsed = result.split(",");
+        if(parsed[0].equals("error")) {
+            return 0;
+        } else if ( parsed[2].equals("player1")) {
+            return 1;
+        } else if (parsed[2].equals("player2")) {
+            return 2;
+        } else {
+            return -1;
+        }
+
+    }
+
 }

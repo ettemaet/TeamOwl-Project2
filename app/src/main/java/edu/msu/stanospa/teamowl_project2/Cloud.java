@@ -31,6 +31,7 @@ public class Cloud {
     private static final String FINDGAME_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/findgame.php";
     private static final String PLACEBIRD_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/placebird.php";
     private static final String GETTURNID_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/getturnid.php";
+    private static final String EXITDC_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/endgame.php";
     private static final String UTF8 = "UTF-8";
 
     /**
@@ -447,6 +448,41 @@ public class Cloud {
             return false;
         } catch(IOException ex) {
             return false;
+        }
+    }
+
+    public void ExitGame(String gameid) {
+        HttpClient httpClient = new DefaultHttpClient();
+
+        HttpPost httpPost = new HttpPost(REGISTER_URL);
+
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+        nameValuePair.add(new BasicNameValuePair("gameid", gameid));
+
+
+        //Encoding POST data
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String responseString = " ";
+        try {
+            HttpResponse response = httpClient.execute(httpPost);
+            // write response to log
+            HttpEntity responseEntity = response.getEntity();
+            if(responseEntity != null) {
+                responseString = EntityUtils.toString(responseEntity);
+            }
+            Log.i("return string",responseString);
+            //Log.d("Http Post Response:", response.toString());
+        } catch (ClientProtocolException e) {
+            // Log exception
+            e.printStackTrace();
+        } catch (IOException e) {
+            // Log exception
+            e.printStackTrace();
         }
     }
 
