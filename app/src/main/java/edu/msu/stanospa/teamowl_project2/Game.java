@@ -135,6 +135,8 @@ public class Game implements Serializable {
      */
     private String gameId;
 
+    private Cloud cloud;
+
 
     /**
      * @param context the current context
@@ -272,6 +274,7 @@ public class Game implements Serializable {
         }
 
         birds.add(getCurrentPlayer().getSelectedBird());
+        getCurrentPlayer().getSelectedBird().saveToCloud(gameId,Integer.toString(localTurn));
 
         //advanceTurn();
     }

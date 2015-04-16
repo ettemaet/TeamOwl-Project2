@@ -39,6 +39,7 @@ public class GameActivity extends ActionBarActivity {
 
     public void onPlaceBird(View view) {
         gameView.onPlaceBird();
+        
 
         Bundle bundle = new Bundle();
         gameView.getGame().saveInstanceState(bundle, this);
