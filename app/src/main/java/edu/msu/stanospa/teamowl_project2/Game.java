@@ -92,6 +92,10 @@ public class Game implements Serializable {
      */
     private int roundNum = 0;
 
+    private int localTurn = 0;
+
+    private boolean isPlayerOne = true;
+
     /**
      * Is there a bird currently being dragged
      */
@@ -395,5 +399,16 @@ public class Game implements Serializable {
     }
     public void saveInstanceState(Bundle bundle, Context context) {
         bundle.putSerializable(context.getString(R.string.game_state), this);
+    }
+
+    //return true if its your turn
+    public boolean CheckTurnState() {
+        if(isPlayerOne) {
+            //if local player is player one
+            return (localTurn % 4 == 0 || localTurn % 4 == 3);
+        } else {
+            // if is player two
+            return (localTurn % 4 == 1|| localTurn % 4 == 2);
+        }
     }
 }
