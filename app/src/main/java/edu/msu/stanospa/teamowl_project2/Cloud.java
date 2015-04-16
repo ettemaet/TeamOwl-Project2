@@ -236,7 +236,7 @@ public class Cloud {
                 return "yes,create," + xml.getAttributeValue(null, "gameid") ;
             } else if ( status.equals("found")){
                 // Player 2 joins and finds a game
-                return "yes,found";
+                return "yes,found," + xml.getAttributeValue(null, "gameid");
             } else if (status.equals("ready")) {
                 // Player 1 waiting has finally found a game
                 return "yes,ready," + xml.getAttributeValue(null, "gameid");
