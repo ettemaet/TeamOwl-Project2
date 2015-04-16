@@ -53,7 +53,7 @@ public class GameView extends View {
         return game.inGameOverState();
     }
 
-    public void setGameId(String id) {game.setGameId(id);}
+    public void setGameId(String gameId) {game.setGameId(gameId);}
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

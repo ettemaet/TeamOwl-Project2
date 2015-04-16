@@ -88,6 +88,7 @@ public class WaitingActivity extends ActionBarActivity {
                             //game.setPlayer2Name(Username);
                             game.saveInstanceState(bundle, getBaseContext());
                             Intent selection = new Intent(getBaseContext(), SelectionActivity.class);
+                            selection.putExtra("gameId", playerWaiting[2]);
                             selection.putExtras(bundle);
                             startActivity(selection);
                         } else if (playerWaiting[1].equals("ready")) {
@@ -98,6 +99,7 @@ public class WaitingActivity extends ActionBarActivity {
                             game.setGameId(playerWaiting[2]);
                             game.saveInstanceState(bundle, getBaseContext());
                             Intent selection = new Intent(getBaseContext(), SelectionActivity.class);
+                            selection.putExtra("gameId", playerWaiting[2]);
                             selection.putExtras(bundle);
                             startActivity(selection);
                         } else if (playerWaiting[1].equals("create")) {

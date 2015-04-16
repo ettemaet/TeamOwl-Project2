@@ -60,6 +60,8 @@ public class SelectionActivity extends ActionBarActivity {
         this.selectionText = (TextView) findViewById(R.id.playerNameLabel);
         setPlayerSelectionText();
 
+        final String gameId = getIntent().getStringExtra("gameId");
+
         final Context context = getApplicationContext();
         CharSequence noBirdText = "Please select a bird!";
         int duration = Toast.LENGTH_SHORT;
@@ -79,16 +81,20 @@ public class SelectionActivity extends ActionBarActivity {
             @Override
             public void run() {
                 while (stillMyTurn) {
-                    if ((cloud.isMyTurn(game.getGameId(), Integer.toString(player))) && birdSelected) {
+                    //if ((cloud.isMyTurn(game.getGameId(), Integer.toString(player))) && birdSelected) {
+                    if ((cloud.isMyTurn(gameId, Integer.toString(player))) && birdSelected) {
+
                         Log.i("BIRD SELECTED IF: ", " Value" + birdSelected);
                         stillMyTurn = false;
                         game.saveInstanceState(newBundle, getBaseContext());
                         Intent intent = new Intent(getBaseContext(), GameActivity.class);
-                        intent.putExtra("gameId", game.getGameId());
+                        intent.putExtra("gameId", gameId);
                         intent.putExtras(newBundle);
                         startActivity(intent);
                         finish();
-                    } else if ((cloud.isMyTurn(game.getGameId(), Integer.toString(player))) && !birdSelected) {
+                    //} else if ((cloud.isMyTurn(game.getGameId(), Integer.toString(player))) && !birdSelected) {
+                    } else if ((cloud.isMyTurn(gameId, Integer.toString(player))) && !birdSelected) {
+
                         Log.i("BIRD SELECTED IF ELSE: ", " Value" + birdSelected);
                         //Do nothing, is current player's turn but no bird is selected
                     } else {
