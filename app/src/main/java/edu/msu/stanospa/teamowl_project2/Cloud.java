@@ -534,10 +534,12 @@ public class Cloud {
             String status = xml.getAttributeValue(null, "status");
             if(status.equals("yes"))
             {
+                Log.i("isMyTurn():", "yes");
                 return true;
             }
             else
             {
+                Log.i("isMyTurn():", "no");
                 return false;
             }
             // We are done
