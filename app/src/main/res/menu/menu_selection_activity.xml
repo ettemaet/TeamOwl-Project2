@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="edu.msu.stanospa.teamowl_project2.SelectionActivity">
+    <item android:id="@+id/menu_exit" android:title="@string/exit"
+        android:orderInCategory="100"/>
+</menu>

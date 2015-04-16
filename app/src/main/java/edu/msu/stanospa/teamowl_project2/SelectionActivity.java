@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,6 +61,30 @@ public class SelectionActivity extends ActionBarActivity {
             selectionView.loadInstanceState(bundle);
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_selection_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_exit:
+                Cloud cloud = new Cloud();
+                cloud.ExitGame(game.getGameId());
+                Toast.makeText(getBaseContext(), "Exiting Game", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     /**
      * set the text at the top of the selection screen to the appropriate player
