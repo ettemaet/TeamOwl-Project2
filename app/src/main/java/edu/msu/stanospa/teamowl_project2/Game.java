@@ -273,8 +273,8 @@ public class Game implements Serializable {
             }
         }
 
-        birds.add(getCurrentPlayer().getSelectedBird());
-        getCurrentPlayer().getSelectedBird().saveToCloud(gameId,Integer.toString(localTurn));
+        birds.add(localPlayer.getSelectedBird());
+        localPlayer.getSelectedBird().saveToCloud(gameId,Integer.toString(localTurn));
 
         //advanceTurn();
     }
