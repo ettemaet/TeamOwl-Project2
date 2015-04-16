@@ -258,6 +258,7 @@ public class Game implements Serializable {
 
         //Changed ^ for project 2
         localPlayer.setSelectedBird(copyOfSelected);
+        dragging = localPlayer.getSelectedBird();
         //advanceTurn();
     }
 
@@ -363,6 +364,8 @@ public class Game implements Serializable {
         for (Bird bird : birds) {
             bird.reloadBitmap(context);
         }
+
+        localPlayer.getSelectedBird().reloadBitmap(context);
 
         //player1.getSelectedBird().reloadBitmap(context);
         //player2.getSelectedBird().reloadBitmap(context);
