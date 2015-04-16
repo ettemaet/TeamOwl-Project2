@@ -75,13 +75,16 @@ public class SelectionActivity extends ActionBarActivity {
             @Override
             public void run() {
                 if ((cloud.isMyTurn(game.getGameId(), Integer.toString(player))) && birdSelected) {
+                    Log.i("BIRD SELECTED IF: ", " Value" + birdSelected);
                     Intent intent = new Intent(getBaseContext(), GameActivity.class);
                     intent.putExtras(newBundle);
                     startActivity(intent);
                     finish();
                 } else if ((cloud.isMyTurn(game.getGameId(), Integer.toString(player))) && !birdSelected) {
+                    Log.i("BIRD SELECTED IF ELSE: ", " Value" + birdSelected);
                     //Do nothing, is current player's turn but no bird is selected
                 } else {
+                    Log.i("BIRD SELECTED ELSE: ", " Value" + birdSelected);
                     changeToWaitingText();
                 }
                 try {
