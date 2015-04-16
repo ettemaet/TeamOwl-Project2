@@ -84,6 +84,7 @@ public class SelectionActivity extends ActionBarActivity {
                         stillMyTurn = false;
                         game.saveInstanceState(newBundle, getBaseContext());
                         Intent intent = new Intent(getBaseContext(), GameActivity.class);
+                        intent.putExtra("gameId", game.getGameId());
                         intent.putExtras(newBundle);
                         startActivity(intent);
                         finish();

@@ -32,7 +32,8 @@ public class GameActivity extends ActionBarActivity {
             Game game = (Game)getIntent().getExtras().getSerializable(getString(R.string.game_state));
             gameView.setGame(game);
         }
-
+        String gId = getIntent().getStringExtra("gameId");
+        gameView.setGameId(gId);
         TextView tv = (TextView)findViewById(R.id.placementText);
         tv.setText(getString(R.string.bird_placement_info) +
                 gameView.getGame().getCurrentPlayerName());
