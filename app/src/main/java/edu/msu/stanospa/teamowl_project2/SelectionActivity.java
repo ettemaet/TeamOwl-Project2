@@ -21,6 +21,15 @@ public class SelectionActivity extends ActionBarActivity {
 
     private Toast noBirdToast;
 
+    private Cloud cloud;
+
+    private Boolean birdSelected = false;
+
+    /**
+     * Local player - either 1 or 2
+     */
+    private int player;
+
     @Override
     protected void onSaveInstanceState(Bundle bundle) {
         super.onSaveInstanceState(bundle);
@@ -30,9 +39,11 @@ public class SelectionActivity extends ActionBarActivity {
     }
 
     @Override
-    protected void onCreate(Bundle bundle) {
+    protected void onCreate(final Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_selection);
+
+        cloud = new Cloud();
 
         if(bundle != null) {
             game = (Game)bundle.getSerializable(getString(R.string.game_state));
@@ -53,11 +64,44 @@ public class SelectionActivity extends ActionBarActivity {
         TextView v = (TextView) noBirdToast.getView().findViewById(android.R.id.message);
         v.setTextColor(Color.RED);
 
+        boolean player1 = game.isPlayerOne();
+        if (player1) {
+            player = 1;
+        } else { player = 2; }
+
+        final Bundle newBundle = new Bundle();
+        game.saveInstanceState(bundle, this);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if ((cloud.isMyTurn(game.getGameId(), Integer.toString(player))) && birdSelected) {
+                    Intent intent = new Intent(getBaseContext(), GameActivity.class);
+                    intent.putExtras(newBundle);
+                    startActivity(intent);
+                    finish();
+                } else if ((cloud.isMyTurn(game.getGameId(), Integer.toString(player))) && !birdSelected) {
+                    //Do nothing, is current player's turn but no bird is selected
+                } else {
+                    changeToWaitingText();
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    // handle the exception...
+                }
+            }
+        }).start();
+
 
         if (bundle != null){
             Log.i("onCreate()", "restoring state...");
             selectionView.loadInstanceState(bundle);
         }
+    }
+
+    private void changeToWaitingText() {
+        selectionText.setText(R.string.selection_waiting_title);
     }
 
     /**
@@ -72,16 +116,12 @@ public class SelectionActivity extends ActionBarActivity {
         game.saveInstanceState(bundle, this);
 
         if (selectionView.isSelected()) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
+            birdSelected = true;
 
-                }
-            });
-            Cloud cloud = new Cloud();
+
             selectionView.setPlayerSelection(game);
 
-            if (!game.inSelectionState()){
+            /*if (!game.inSelectionState()){
                 Intent intent = new Intent(this, GameActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -89,6 +129,7 @@ public class SelectionActivity extends ActionBarActivity {
             }
             else
                 setPlayerSelectionText();
+            */
 
         } else {
             noBirdToast.show();
@@ -96,7 +137,7 @@ public class SelectionActivity extends ActionBarActivity {
         }
     }
 
-    public int checkPlayerTurn(Cloud cloud) {
+    public int checkPlayerTurn() {
         String result = cloud.GetCurTurn(game.getGameId());
         String[] parsed = new String[3];
         parsed = result.split(",");

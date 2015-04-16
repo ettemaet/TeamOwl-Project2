@@ -94,6 +94,14 @@ public class Game implements Serializable {
 
     private int localTurn = 0;
 
+    public boolean isPlayerOne() {
+        return isPlayerOne;
+    }
+
+    public void setPlayerOne(boolean isPlayerOne) {
+        this.isPlayerOne = isPlayerOne;
+    }
+
     private boolean isPlayerOne = true;
 
     /**

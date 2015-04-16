@@ -38,5 +38,6 @@
     <string name="title_activity_dummy">DummyActivity</string>
     <string name="waiting_text">Looking for game</string>
     <string name="waiting_for_player">Game created, waiting for player</string>
+    <string name="selection_waiting_title">Waiting for opponent to play!</string>
 
 </resources>
