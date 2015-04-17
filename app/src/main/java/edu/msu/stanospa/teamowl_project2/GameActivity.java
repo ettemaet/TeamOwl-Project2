@@ -54,11 +54,16 @@ public class GameActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_exit:
-                Cloud cloud = new Cloud();
-                cloud.ExitGame(gameView.getGame().getGameId());
-                Toast.makeText(getBaseContext(), "Exiting Game", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Cloud cloud = new Cloud();
+                        cloud.ExitGame(gId);
+                        Toast.makeText(getBaseContext(), "Exiting Game", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                        startActivity(intent);
+                    }
+                }).start();
 
             default:
                 return super.onOptionsItemSelected(item);
