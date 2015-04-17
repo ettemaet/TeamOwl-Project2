@@ -296,9 +296,10 @@ public class Game implements Serializable {
             public void run() {
                 Cloud cloud = new Cloud();
                 localPlayer.getSelectedBird().saveToCloud(cloud, gameId, Integer.toString(localTurn));
+                AddLocalTurn();
             }
         }).start();
-        AddLocalTurn();
+
 
         //advanceTurn();
     }
