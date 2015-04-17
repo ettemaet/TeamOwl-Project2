@@ -267,7 +267,7 @@ public class Game implements Serializable {
     public void confirmBirdPlacement() {
         // Check to see if the player's bird collides with any other bird
         for(int itr = 0; itr < birds.size(); itr++) {
-            if(getCurrentPlayer().getSelectedBird().collisionTest(birds.get(itr))) {
+            if(getLocalPlayer().getSelectedBird().collisionTest(birds.get(itr))) {
                 declareWinner(getNextPlayer());
                 return;
             }
@@ -302,6 +302,8 @@ public class Game implements Serializable {
     public String getLocalPlayerName() {
         return localPlayer.getName();
     }
+
+    public Player getLocalPlayer() { return localPlayer; }
 
     /**
      * Gets the current player's name
