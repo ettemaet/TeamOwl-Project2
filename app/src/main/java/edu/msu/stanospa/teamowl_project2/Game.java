@@ -62,6 +62,11 @@ public class Game implements Serializable {
      */
     private ArrayList<Bird> birds = new ArrayList<>();
 
+    public void AddBird(Bird newBird)
+    {
+        birds.add(newBird);
+    }
+
     /**
      * The first player in the game
      */
@@ -91,6 +96,18 @@ public class Game implements Serializable {
      * The current round number (0 based)
      */
     private int roundNum = 0;
+
+    public int getLocalTurn() {
+        return localTurn;
+    }
+
+    public void AddLocalTurn(){
+        this.localTurn ++;
+    }
+
+    public void setLocalTurn(int localTurn) {
+        this.localTurn = localTurn;
+    }
 
     private int localTurn = 0;
 
