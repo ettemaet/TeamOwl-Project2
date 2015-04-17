@@ -1,5 +1,6 @@
 package edu.msu.stanospa.teamowl_project2;
 
+import android.os.Debug;
 import android.util.Log;
 import android.util.Xml;
 
@@ -33,6 +34,7 @@ public class Cloud {
     private static final String GETTURNID_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/getturnid.php";
     private static final String EXITDC_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/endgame.php";
     private static final String ISMYTURN_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/ismyturn.php";
+    private static final String GETMOVE_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/getturninfo.php";
     private static final String UTF8 = "UTF-8";
 
     /**
@@ -532,6 +534,7 @@ public class Cloud {
             xml.require(XmlPullParser.START_TAG, null, "turn");
 
             String status = xml.getAttributeValue(null, "status");
+            Log.i("count",xml.getAttributeValue(null, "count"));
             if(status.equals("yes"))
             {
                 Log.i("isMyTurn():", "yes");
@@ -548,6 +551,72 @@ public class Cloud {
         } catch(IOException ex) {
             return false;
         }
+    }
+
+    public String GetMovement(String gameid, int turnnum) {
+        HttpClient httpClient = new DefaultHttpClient();
+
+        HttpPost httpPost = new HttpPost(GETMOVE_URL);
+
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+        nameValuePair.add(new BasicNameValuePair("gameid", gameid));
+        nameValuePair.add(new BasicNameValuePair("turnnum", Integer.toString(turnnum)));
+
+
+        //Encoding POST data
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String responseString = " ";
+        try {
+            HttpResponse response = httpClient.execute(httpPost);
+            // write response to log
+            HttpEntity responseEntity = response.getEntity();
+            if(responseEntity != null) {
+                responseString = EntityUtils.toString(responseEntity);
+            }
+            Log.i("return string",responseString);
+            //Log.d("Http Post Response:", response.toString());
+        } catch (ClientProtocolException e) {
+            // Log exception
+            e.printStackTrace();
+        } catch (IOException e) {
+            // Log exception
+            e.printStackTrace();
+        }
+
+        /**
+         * Create an XML parser for the result
+         */
+        try {
+            XmlPullParser xml = Xml.newPullParser();
+            xml.setInput(new StringReader(responseString));
+
+            xml.nextTag();      // Advance to first tag
+            xml.require(XmlPullParser.START_TAG, null, "turn");
+
+            String status = xml.getAttributeValue(null, "status");
+            if(status.equals("ok"))
+            {
+                return "yes," + xml.getAttributeValue(null, "birdid") +
+                        xml.getAttributeValue(null, "x") +
+                        xml.getAttributeValue(null, "y") +
+                        xml.getAttributeValue(null, "gameover");
+            }
+            else
+            {
+                return "error";
+            }
+            // We are done
+        } catch(XmlPullParserException ex) {
+            return "error";
+        } catch(IOException ex) {
+            return "error";
+        }
+
     }
 
 

@@ -80,14 +80,43 @@ public class SelectionActivity extends ActionBarActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+
                 while (stillMyTurn) {
+                    int serverTurn = Integer.parseInt(cloud.GetCurTurn(gameId).split(",")[1]);
+                    //Log.i("player",""+player);
                     //if ((cloud.isMyTurn(game.getGameId(), Integer.toString(player))) && birdSelected) {
-                    Log.i("gameid, player, birdSelected", "values: " + gameId + Integer.toString(player) + birdSelected);
-                    Log.i("isMyTurn()", "value: " + cloud.isMyTurn(gameId, Integer.toString(player)));
+                    //Log.i("gameid, player, birdSelected", "values: " + gameId + Integer.toString(player) + birdSelected);
+                    //Log.i("isMyTurn()", "value: " + cloud.isMyTurn(gameId, Integer.toString(player)));
+                    if(game.getLocalTurn() < serverTurn) {
+                        //load the bird from server
+                        String birdinfo = cloud.GetMovement(gameId,game.getLocalTurn());
+                        String[] result = birdinfo.split(",");
+                        if(result[0].equals("error"))
+                        {
+                            Log.i("getmovement","error");
+                            continue;
+                        }
+                        else
+                        {
+                            if(result[4].equals("1"))
+                            {
+                                //raside winning condition;
+                            }
+                            Bird serverBird = new Bird(getBaseContext(),Integer.parseInt(result[1]),Float.parseFloat(result[2])
+                                    ,Float.parseFloat(result[3]));
+                            game.AddBird(serverBird);
+
+                        }
+
+
+                        //inc the turn number
+                        game.AddLocalTurn();
+                        continue;
+                    }
                     if ((cloud.isMyTurn(gameId, Integer.toString(player))) && birdSelected) {
                         Log.i("BIRD SELECTED IF: ", " Value" + birdSelected);
                         stillMyTurn = false;
-                        game.saveInstanceState(newBundle, getBaseContext());
+                        game.saveInstanceState(newBundle, context);
                         Intent intent = new Intent(getBaseContext(), GameActivity.class);
                         intent.putExtra("gameId", gameId);
                         intent.putExtras(newBundle);
