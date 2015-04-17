@@ -29,6 +29,8 @@ public class SelectionActivity extends ActionBarActivity {
 
     private Boolean stillMyTurn = true;
 
+    private String gameId = "";
+
     /**
      * Local player - either 1 or 2
      */
@@ -60,7 +62,7 @@ public class SelectionActivity extends ActionBarActivity {
         this.selectionText = (TextView) findViewById(R.id.playerNameLabel);
         setPlayerSelectionText();
 
-        final String gameId = getIntent().getStringExtra("gameId");
+        gameId = getIntent().getStringExtra("gameId");
 
         final Context context = getApplicationContext();
         CharSequence noBirdText = "Please select a bird!";
@@ -160,7 +162,7 @@ public class SelectionActivity extends ActionBarActivity {
         switch (item.getItemId()) {
             case R.id.menu_exit:
                 Cloud cloud = new Cloud();
-                cloud.ExitGame(game.getGameId());
+                cloud.ExitGame(gameId);
                 Toast.makeText(getBaseContext(), "Exiting Game", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
