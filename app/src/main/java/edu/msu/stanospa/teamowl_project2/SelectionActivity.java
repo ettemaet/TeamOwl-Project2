@@ -82,6 +82,8 @@ public class SelectionActivity extends ActionBarActivity {
             public void run() {
                 while (stillMyTurn) {
                     //if ((cloud.isMyTurn(game.getGameId(), Integer.toString(player))) && birdSelected) {
+                    Log.i("gameid, player, birdSelected", "values: " + gameId + Integer.toString(player) + birdSelected);
+                    Log.i("isMyTurn()", "value: " + cloud.isMyTurn(gameId, Integer.toString(player)));
                     if ((cloud.isMyTurn(gameId, Integer.toString(player))) && birdSelected) {
                         Log.i("BIRD SELECTED IF: ", " Value" + birdSelected);
                         stillMyTurn = false;

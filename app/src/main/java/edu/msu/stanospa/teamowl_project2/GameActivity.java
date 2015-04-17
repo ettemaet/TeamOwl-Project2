@@ -16,6 +16,8 @@ public class GameActivity extends ActionBarActivity {
 
     private GameView gameView;
 
+    private String gId;
+
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -32,7 +34,7 @@ public class GameActivity extends ActionBarActivity {
             Game game = (Game)getIntent().getExtras().getSerializable(getString(R.string.game_state));
             gameView.setGame(game);
         }
-        String gId = getIntent().getStringExtra("gameId");
+        gId = getIntent().getStringExtra("gameId");
         gameView.setGameId(gId);
         TextView tv = (TextView)findViewById(R.id.placementText);
         tv.setText(getString(R.string.bird_placement_info) +
@@ -83,6 +85,7 @@ public class GameActivity extends ActionBarActivity {
 
             Intent intent = new Intent(this, SelectionActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("gameId", gId);
             intent.putExtras(bundle);
             startActivity(intent);
             finish();
