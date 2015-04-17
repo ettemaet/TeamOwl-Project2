@@ -84,7 +84,8 @@ public class SelectionActivity extends ActionBarActivity {
             public void run() {
 
                 while (stillMyTurn) {
-                    int serverTurn = Integer.parseInt(cloud.GetCurTurn(gameId).split(",")[1]);
+                    String temp = cloud.GetCurTurn(gameId).split(",")[1];
+                    int serverTurn = Integer.parseInt(temp);
                     //Log.i("player",""+player);
                     //if ((cloud.isMyTurn(game.getGameId(), Integer.toString(player))) && birdSelected) {
                     //Log.i("gameid, player, birdSelected", "values: " + gameId + Integer.toString(player) + birdSelected);
@@ -126,7 +127,7 @@ public class SelectionActivity extends ActionBarActivity {
                         finish();
                     //} else if ((cloud.isMyTurn(game.getGameId(), Integer.toString(player))) && !birdSelected) {
                     } else if ((cloud.isMyTurn(gameId, Integer.toString(player))) && !birdSelected) {
-                        setPlayerSelectionText();
+                        setPlayerSelectionTextInThread();
                         Log.i("BIRD SELECTED IF ELSE: ", " Value" + birdSelected);
                         //Do nothing, is current player's turn but no bird is selected
                     } else {
@@ -189,6 +190,15 @@ public class SelectionActivity extends ActionBarActivity {
      */
     private void setPlayerSelectionText() {
         selectionText.setText(game.getLocalPlayerName() + " " + getString(R.string.player_select));
+    }
+
+    private void setPlayerSelectionTextInThread() {
+        selectionText.post(new Runnable() {
+            @Override
+            public void run() {
+                selectionText.setText(game.getLocalPlayerName() + " " + getString(R.string.player_select));
+            }
+        });
     }
 
     public void onConfirmSelection(View view) {
