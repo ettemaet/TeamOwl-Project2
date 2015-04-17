@@ -93,7 +93,7 @@ public class SelectionActivity extends ActionBarActivity {
                         //load the bird from server
                         String birdinfo = cloud.GetMovement(gameId,game.getLocalTurn());
                         String[] result = birdinfo.split(",");
-                        if(result[0].equals("error"))
+                        if(!result[0].equals("yes"))
                         {
                             Log.i("getmovement","error");
                             continue;

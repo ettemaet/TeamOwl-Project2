@@ -601,9 +601,9 @@ public class Cloud {
             String status = xml.getAttributeValue(null, "status");
             if(status.equals("ok"))
             {
-                return "yes," + xml.getAttributeValue(null, "birdid") +
-                        xml.getAttributeValue(null, "x") +
-                        xml.getAttributeValue(null, "y") +
+                return "yes," + xml.getAttributeValue(null, "birdid") + "," +
+                        xml.getAttributeValue(null, "x") + "," +
+                        xml.getAttributeValue(null, "y") + "," +
                         xml.getAttributeValue(null, "gameover");
             }
             else
