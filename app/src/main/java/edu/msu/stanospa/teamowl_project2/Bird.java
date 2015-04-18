@@ -73,6 +73,19 @@ public class Bird implements Serializable {
         setRect();
     }
 
+    public Bird(Context context, int id, float relX, float relY, float gameSize) {
+        this.id = id;
+        bird = BitmapFactory.decodeResource(context.getResources(), id);
+        this.relX = relX;
+        this.relY = relY;
+        x = relX*gameSize;
+        y = relY*gameSize;
+
+        //bird.move()
+        rect = new Rect();
+        setRect();
+    }
+
     public Bird(Bird copy) {
         this.id = copy.id;
         this.bird = copy.bird;
@@ -111,6 +124,12 @@ public class Bird implements Serializable {
             y = gameSize - height;
 
         setRect();
+
+        Log.i("x",""+x);
+        Log.i("y",""+y);
+        Log.i("relX",""+relX);
+        Log.i("relY",""+relY);
+
     }
 
     private void setRect() {
