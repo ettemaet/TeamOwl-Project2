@@ -48,6 +48,8 @@ public class Bird implements Serializable {
 
     private float relY;
 
+    private float mGameSize;
+
     /**
      * x location
      */
@@ -73,18 +75,6 @@ public class Bird implements Serializable {
         setRect();
     }
 
-    public Bird(Context context, int id, float relX, float relY, float gameSize) {
-        this.id = id;
-        bird = BitmapFactory.decodeResource(context.getResources(), id);
-        this.relX = relX;
-        this.relY = relY;
-        x = relX*gameSize;
-        y = relY*gameSize;
-
-        //bird.move()
-        rect = new Rect();
-        setRect();
-    }
 
     public Bird(Bird copy) {
         this.id = copy.id;
@@ -194,6 +184,8 @@ public class Bird implements Serializable {
             setRect();
         }
 
+        mGameSize = gameSize;
+
         canvas.save();
         canvas.translate(marginX + x, marginY + y);
         //canvas.translate(-bird.getWidth() / 2, -bird.getHeight() / 2);
@@ -202,7 +194,8 @@ public class Bird implements Serializable {
     }
 
     public void saveToCloud(Cloud cloud,String gameid,String turn) {
-        cloud.PlaceBirdCloud(gameid,turn,id,x,y,false);
+
+        cloud.PlaceBirdCloud(gameid,turn,id,x/mGameSize,y/mGameSize,false);
     }
 
 
