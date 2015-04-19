@@ -162,22 +162,25 @@ public class SelectionActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_exit:
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Cloud cloud = new Cloud();
-                        cloud.ExitGame(gameId);
-                        Toast.makeText(getBaseContext(), "Exiting Game", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                        startActivity(intent);
-                    }
-                }).start();
+                endGame();
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    private void endGame() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Cloud cloud = new Cloud();
+                cloud.ExitGame(gameId);
+                Toast.makeText(getBaseContext(), "Exiting Game", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        }).start();
+    }
 
     private void changeToWaitingText() {
         selectionText.post(new Runnable() {
