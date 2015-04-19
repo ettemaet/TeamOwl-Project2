@@ -291,7 +291,7 @@ public class Game implements Serializable {
         // Check to see if the player's bird collides with any other bird
         for(int itr = 0; itr < birds.size(); itr++) {
             if(getLocalPlayer().getSelectedBird().collisionTest(birds.get(itr))) {
-                declareWinner(getNextPlayer());
+                declareWinner();
                 return;
             }
         }
@@ -316,10 +316,24 @@ public class Game implements Serializable {
 
     /**
      * Set the passed player as the winner, and move the game into the final state
-     * @param winner the player who won
+     *
      */
-    private void declareWinner(Player winner) {
-        this.winner = winner;
+    private void declareWinner() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Boolean amPlayerOne = isPlayerOne();
+                Integer winningPlayerNum;
+                if (amPlayerOne) {
+                    winningPlayerNum = 2;
+                } else { winningPlayerNum = 1; }
+
+                Cloud cloud = new Cloud();
+                String winnerName = cloud.GetPlayerInfo(gameId, winningPlayerNum);
+                winner = new Player(winnerName);
+            }
+        });
         state = GameState.gameOver;
     }
 

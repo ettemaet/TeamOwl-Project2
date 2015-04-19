@@ -35,6 +35,7 @@ public class Cloud {
     private static final String EXITDC_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/endgame.php";
     private static final String ISMYTURN_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/ismyturn.php";
     private static final String GETMOVE_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/getturninfo.php";
+    private static final String GETPLAYERINFO_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/getplayername.php";
     private static final String UTF8 = "UTF-8";
 
     /**
@@ -324,7 +325,7 @@ public class Cloud {
     {
         HttpClient httpClient = new DefaultHttpClient();
 
-        HttpPost httpPost = new HttpPost(FINDGAME_URL);
+        HttpPost httpPost = new HttpPost(GETPLAYERINFO_URL);
 
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
