@@ -104,6 +104,7 @@ public class SelectionActivity extends ActionBarActivity {
                             if(result[4].equals("1"))
                             {
                                 //raise winning condition;
+                                game.declareWinner();
                                 //go to win activity
 
                             }

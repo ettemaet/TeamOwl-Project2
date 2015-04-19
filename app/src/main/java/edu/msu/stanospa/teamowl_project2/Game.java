@@ -318,7 +318,7 @@ public class Game implements Serializable {
      * Set the passed player as the winner, and move the game into the final state
      *
      */
-    private void declareWinner() {
+    public void declareWinner() {
 
         new Thread(new Runnable() {
             @Override
@@ -493,7 +493,7 @@ public class Game implements Serializable {
                         timerRunning = false;
 
                         // go to new activity
-
+                        declareWinner();
                         // end the game
                     }
                     try {
