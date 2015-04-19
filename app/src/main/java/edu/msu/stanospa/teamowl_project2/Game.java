@@ -334,11 +334,11 @@ public class Game implements Serializable {
                 if (result.startsWith("yes")) {
                     String[] winnerInfo = result.split(",");
                     winner = new Player(winnerInfo[2]);
+                    state = GameState.gameOver;
                 }
 
             }
         }).start();
-        state = GameState.gameOver;
     }
 
     public void setLocalPlayer(String name) {
