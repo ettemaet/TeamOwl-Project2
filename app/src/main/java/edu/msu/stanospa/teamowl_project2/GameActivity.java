@@ -75,6 +75,7 @@ public class GameActivity extends ActionBarActivity {
     }
 
     public void onPlaceBird(View view) {
+        gameView.getGame().StopTimer();
         gameView.onPlaceBird();
         
 
