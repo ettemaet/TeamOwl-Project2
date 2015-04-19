@@ -518,4 +518,8 @@ public class Game implements Serializable {
             }
         }).start();
     }
+
+    public void StopTimer() {
+        timerRunning = false;
+    }
 }
