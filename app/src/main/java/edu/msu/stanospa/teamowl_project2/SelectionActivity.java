@@ -113,7 +113,9 @@ public class SelectionActivity extends ActionBarActivity {
 
                         }
                         //check if the other guy exit or dc
-
+                        cloud.IsGameOver(gameId) {
+                            // goto final score and display opponent dc or exit
+                        }
                         //
 
 
