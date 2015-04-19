@@ -288,14 +288,25 @@ public class Game implements Serializable {
      * Confirms the player has chosen where their bird goes
      */
     public void confirmBirdPlacement() {
+        final int curTurn = localTurn;
         // Check to see if the player's bird collides with any other bird
         for(int itr = 0; itr < birds.size(); itr++) {
             if(getLocalPlayer().getSelectedBird().collisionTest(birds.get(itr))) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Cloud cloud = new Cloud();
+                        localPlayer.getSelectedBird().saveToCloud(cloud, gameId, Integer.toString(curTurn),true);
+
+
+                    }
+                }).start();
                 declareWinner();
                 return;
             }
         }
-        final int curTurn = localTurn;
+
 
         birds.add(localPlayer.getSelectedBird());
         new Thread(new Runnable() {
@@ -303,7 +314,7 @@ public class Game implements Serializable {
             public void run() {
 
                 Cloud cloud = new Cloud();
-                localPlayer.getSelectedBird().saveToCloud(cloud, gameId, Integer.toString(curTurn));
+                localPlayer.getSelectedBird().saveToCloud(cloud, gameId, Integer.toString(curTurn),false);
 
 
             }

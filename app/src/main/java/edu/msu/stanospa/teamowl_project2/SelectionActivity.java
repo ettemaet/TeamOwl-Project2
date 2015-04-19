@@ -107,10 +107,11 @@ public class SelectionActivity extends ActionBarActivity {
                                 game.declareWinner();
                                 //go to win activity
 
+                            } else {
+                                Bird serverBird = new Bird(getBaseContext(), Integer.parseInt(result[1]), Float.parseFloat(result[2])
+                                        , Float.parseFloat(result[3]));
+                                game.AddBird(serverBird);
                             }
-                            Bird serverBird = new Bird(getBaseContext(),Integer.parseInt(result[1]),Float.parseFloat(result[2])
-                                    ,Float.parseFloat(result[3]));
-                            game.AddBird(serverBird);
 
                         }
                         //check if the other guy exit or dc

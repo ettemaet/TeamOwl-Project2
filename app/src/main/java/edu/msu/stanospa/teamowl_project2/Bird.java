@@ -193,9 +193,9 @@ public class Bird implements Serializable {
         canvas.restore();
     }
 
-    public void saveToCloud(Cloud cloud,String gameid,String turn) {
+    public void saveToCloud(Cloud cloud,String gameid,String turn,boolean gameover) {
 
-        cloud.PlaceBirdCloud(gameid,turn,id,x/mGameSize,y/mGameSize,false);
+        cloud.PlaceBirdCloud(gameid,turn,id,x/mGameSize,y/mGameSize,gameover);
     }
 
 
