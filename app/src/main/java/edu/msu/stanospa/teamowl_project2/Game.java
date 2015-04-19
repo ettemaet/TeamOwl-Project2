@@ -330,10 +330,14 @@ public class Game implements Serializable {
                 } else { winningPlayerNum = 1; }
 
                 Cloud cloud = new Cloud();
-                String winnerName = cloud.GetPlayerInfo(gameId, winningPlayerNum);
-                winner = new Player(winnerName);
+                String result = cloud.GetPlayerInfo(gameId, winningPlayerNum);
+                if (result.startsWith("yes")) {
+                    String[] winnerInfo = result.split(",");
+                    winner = new Player(winnerInfo[2]);
+                }
+
             }
-        });
+        }).start();
         state = GameState.gameOver;
     }
 
