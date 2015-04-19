@@ -65,9 +65,9 @@ public class GameActivity extends ActionBarActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                Toast.makeText(getBaseContext(), "Exiting Game", Toast.LENGTH_SHORT).show();
                 Cloud cloud = new Cloud();
                 cloud.ExitGame(gId);
-                Toast.makeText(getBaseContext(), "Exiting Game", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
                 startActivity(intent);
             }
