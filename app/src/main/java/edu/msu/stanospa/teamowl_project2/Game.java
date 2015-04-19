@@ -475,6 +475,8 @@ public class Game implements Serializable {
                         timerRunning = false;
 
                         // go to new activity
+
+                        // end the game
                     }
                     try {
                         Thread.sleep(1000);

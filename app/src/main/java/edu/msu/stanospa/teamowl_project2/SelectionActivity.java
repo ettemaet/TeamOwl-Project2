@@ -103,13 +103,18 @@ public class SelectionActivity extends ActionBarActivity {
                         {
                             if(result[4].equals("1"))
                             {
-                                //raside winning condition;
+                                //raise winning condition;
+                                //go to win activity
+
                             }
                             Bird serverBird = new Bird(getBaseContext(),Integer.parseInt(result[1]),Float.parseFloat(result[2])
                                     ,Float.parseFloat(result[3]));
                             game.AddBird(serverBird);
 
                         }
+                        //check if the other guy exit or dc
+
+                        //
 
 
                         //inc the turn number
