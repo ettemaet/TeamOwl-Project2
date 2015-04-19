@@ -12,6 +12,7 @@ import android.view.View;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Timer;
 
 public class Game implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -151,6 +152,11 @@ public class Game implements Serializable {
      * Current game ID
      */
     private String gameId;
+
+    //
+
+    private boolean timerRunning = false;
+
 
 
 
@@ -456,5 +462,29 @@ public class Game implements Serializable {
             // if is player two
             return (localTurn % 4 == 1|| localTurn % 4 == 2);
         }
+    }
+
+    public void StartGameTimer() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                timerRunning = true;
+                int mTimer = 0;
+                while(timerRunning) {
+                    if(mTimer >= 30) {
+                        timerRunning = false;
+
+                        // go to new activity
+                    }
+                    try {
+                        Thread.sleep(1000);
+                        mTimer++;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        // handle the exception...
+                    }
+                }
+            }
+        }).start();
     }
 }
