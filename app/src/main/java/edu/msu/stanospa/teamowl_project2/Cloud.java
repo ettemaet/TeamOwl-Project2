@@ -236,11 +236,11 @@ public class Cloud {
 
             String status = xml.getAttributeValue(null, "status");
             if(status.equals("create")) {
-                return "yes,create," + xml.getAttributeValue(null, "gameid");
+                return "yes,create," + xml.getAttributeValue(null, "gameid") + "," + xml.getAttributeValue(null, "token");
             } else if ( status.equals("found")){
                 // Player 2 joins and finds a game
                 return "yes,found," + xml.getAttributeValue(null, "gameid") +
-                        "," + xml.getAttributeValue(null, "opponentname");
+                        "," + xml.getAttributeValue(null, "opponentname") + "," + xml.getAttributeValue(null, "token");
             } else if (status.equals("ready")) {
                 // Player 1 waiting has finally found a game
                 return "yes,ready," + xml.getAttributeValue(null, "gameid") +
@@ -325,14 +325,15 @@ public class Cloud {
 
 
     //player: expect 1 or 2
-    public String GetPlayerInfo(String gameid, int player)
+    public String GetPlayerInfo(String gameid,String token, int player)
     {
         HttpClient httpClient = new DefaultHttpClient();
 
         HttpPost httpPost = new HttpPost(GETPLAYERINFO_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
+        nameValuePair.add(new BasicNameValuePair("token", token));
         nameValuePair.add(new BasicNameValuePair("player", Integer.toString(player)));
 
         //Encoding POST data
@@ -388,7 +389,7 @@ public class Cloud {
 
     }
 
-    public boolean PlaceBirdCloud(String gameid,String turnnum,int birdid,float x, float y, boolean gameover)
+    public boolean PlaceBirdCloud(String gameid,String turnnum,int birdid,float x, float y, boolean gameover,String token)
     {
         HttpClient httpClient = new DefaultHttpClient();
 
@@ -396,6 +397,7 @@ public class Cloud {
 
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
+        nameValuePair.add(new BasicNameValuePair("token", token));
         nameValuePair.add(new BasicNameValuePair("turnnum", turnnum));
         nameValuePair.add(new BasicNameValuePair("birdid", Integer.toString(birdid)));
         nameValuePair.add(new BasicNameValuePair("x", Float.toString(x)));
@@ -459,12 +461,13 @@ public class Cloud {
         }
     }
 
-    public void ExitGame(String gameid) {
+    public void ExitGame(String gameid, String token) {
         HttpClient httpClient = new DefaultHttpClient();
 
         HttpPost httpPost = new HttpPost(EXITDC_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+        nameValuePair.add(new BasicNameValuePair("token", token));
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
 
 
@@ -494,14 +497,15 @@ public class Cloud {
         }
     }
 
-    public boolean isMyTurn(String gameid, String player) {
+    public boolean isMyTurn(String gameid, String player, String token) {
         HttpClient httpClient = new DefaultHttpClient();
 
         HttpPost httpPost = new HttpPost(ISMYTURN_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
         nameValuePair.add(new BasicNameValuePair("player", player));
+        nameValuePair.add(new BasicNameValuePair("token", token));
 
 
         //Encoding POST data
@@ -558,13 +562,14 @@ public class Cloud {
         }
     }
 
-    public String GetMovement(String gameid, int turnnum) {
+    public String GetMovement(String gameid, int turnnum, String token) {
         HttpClient httpClient = new DefaultHttpClient();
 
         HttpPost httpPost = new HttpPost(GETMOVE_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
+        nameValuePair.add(new BasicNameValuePair("token", token));
         nameValuePair.add(new BasicNameValuePair("turnnum", Integer.toString(turnnum)));
 
 
@@ -624,13 +629,14 @@ public class Cloud {
 
     }
 
-    public boolean IsGameOver(String gameid) {
+    public boolean IsGameOver(String gameid, String token) {
         HttpClient httpClient = new DefaultHttpClient();
 
         HttpPost httpPost = new HttpPost(GETTURNID_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
+        nameValuePair.add(new BasicNameValuePair("token", token));
         nameValuePair.add(new BasicNameValuePair("player", "1"));
 
 
