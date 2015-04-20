@@ -89,11 +89,14 @@ public class SelectionActivity extends ActionBarActivity {
                     String[] temp = cloud.GetCurTurn(gameId).split(",");
                     if (temp[0].equals("gameover")) {
                         game.declareWinner();
+                        game.saveInstanceState(newBundle, context);
                         Intent intent = new Intent(getBaseContext(), FinalScoreActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtras(newBundle);
                         startActivity(intent);
+                        stillMyTurn = false;
                         finish();
+
                     } else {
                         int serverTurn = Integer.parseInt(temp[1]);
                         if(game.getLocalTurn() < serverTurn) {
@@ -194,7 +197,10 @@ public class SelectionActivity extends ActionBarActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(getBaseContext(), "Exiting Game", Toast.LENGTH_SHORT).show();
+                final Bundle newBundle = new Bundle();
+                //Toast.makeText(getBaseContext(), "Exiting Game", Toast.LENGTH_SHORT).show();
+                game.declareWinner();
+                game.saveInstanceState(newBundle, getBaseContext());
                 Cloud cloud = new Cloud();
                 cloud.ExitGame(gameId);
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
