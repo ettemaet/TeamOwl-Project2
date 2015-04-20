@@ -307,7 +307,9 @@ public class Cloud {
             String status = xml.getAttributeValue(null, "status");
             if(status.equals("ok")) {
                 return "yes," + xml.getAttributeValue(null, "turnnum") +"," + xml.getAttributeValue(null, "player");
-            }  else if (status.equals("error")) {
+            } else if (status.equals("dc")) {
+                return "gameover,";
+            } else if (status.equals("error")) {
                 return "error," +xml.getAttributeValue(null, "msg");
             }
             return null;

@@ -87,6 +87,14 @@ public class SelectionActivity extends ActionBarActivity {
 
                 while (stillMyTurn) {
                     String temp = cloud.GetCurTurn(gameId).split(",")[1];
+                    if (temp.equals("gameover")) {
+                        game.declareWinner();
+                        Intent intent = new Intent(getBaseContext(), FinalScoreActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        finish();
+                    }
                     int serverTurn = Integer.parseInt(temp);
                     //Log.i("player",""+player);
                     //if ((cloud.isMyTurn(game.getGameId(), Integer.toString(player))) && birdSelected) {
