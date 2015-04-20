@@ -65,6 +65,14 @@ public class GameView extends View {
         invalidate();
     }
 
+    public void startTimer(){
+        game.StartGameTimer();
+    }
+
+    public void endTime(){
+        game.StopTimer();
+    }
+
     public void reloadBirds() {
         game.reloadBirds(getContext());
     }

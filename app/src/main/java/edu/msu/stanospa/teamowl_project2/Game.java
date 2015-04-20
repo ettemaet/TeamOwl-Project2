@@ -83,6 +83,7 @@ public class Game implements Serializable {
      */
 
     private Player localPlayer = null;
+
     /**
      * The player that won the game
      */
@@ -122,6 +123,16 @@ public class Game implements Serializable {
 
     private boolean isPlayerOne = true;
 
+    public String getOpponentName() {
+        return opponentName;
+    }
+
+    public void setOpponentName(String opponentName) {
+        this.opponentName = opponentName;
+    }
+
+    private String opponentName;
+
     /**
      * Is there a bird currently being dragged
      */
@@ -157,7 +168,7 @@ public class Game implements Serializable {
 
     private boolean timerRunning = false;
 
-
+    private boolean didILose = false;
 
 
     /**
@@ -292,12 +303,14 @@ public class Game implements Serializable {
         // Check to see if the player's bird collides with any other bird
         for(int itr = 0; itr < birds.size(); itr++) {
             if(getLocalPlayer().getSelectedBird().collisionTest(birds.get(itr))) {
+                didILose = true;
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
 
                         Cloud cloud = new Cloud();
                         localPlayer.getSelectedBird().saveToCloud(cloud, gameId, Integer.toString(curTurn),true);
+                        cloud.ExitGame(gameId);
 
 
                     }
@@ -331,7 +344,7 @@ public class Game implements Serializable {
      */
     public void declareWinner() {
 
-        new Thread(new Runnable() {
+        /*new Thread(new Runnable() {
             @Override
             public void run() {
                 Boolean amPlayerOne = isPlayerOne();
@@ -349,7 +362,14 @@ public class Game implements Serializable {
                 }
 
             }
-        }).start();
+        }).start();*/
+
+        if (didILose) {
+            this.winner = new Player(opponentName);
+        } else {
+            this.winner = localPlayer;
+        }
+        state = GameState.gameOver;
     }
 
     public void setLocalPlayer(String name) {
@@ -504,6 +524,7 @@ public class Game implements Serializable {
                         timerRunning = false;
 
                         // go to new activity
+                        didILose = true;
                         declareWinner();
                         // end the game
                     }

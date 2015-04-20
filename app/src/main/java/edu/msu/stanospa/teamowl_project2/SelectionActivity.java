@@ -57,6 +57,8 @@ public class SelectionActivity extends ActionBarActivity {
         else {
             game = (Game)getIntent().getExtras().getSerializable(getString(R.string.game_state));
         }
+
+        game.StartGameTimer();
         selectionView = (SelectionView)findViewById(R.id.selectionView);
 
         this.selectionText = (TextView) findViewById(R.id.playerNameLabel);
@@ -224,7 +226,7 @@ public class SelectionActivity extends ActionBarActivity {
         if (selectionView.isSelected()) {
             birdSelected = true;
 
-
+            game.StopTimer();
             selectionView.setPlayerSelection(game);
 
             /*if (!game.inSelectionState()){

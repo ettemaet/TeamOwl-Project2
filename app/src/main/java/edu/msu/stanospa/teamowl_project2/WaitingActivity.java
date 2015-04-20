@@ -85,25 +85,25 @@ public class WaitingActivity extends ActionBarActivity {
                             running = false;
                             game.setLocalPlayer(Username);
                             game.setPlayerOne(false);
-                            //game.setPlayer2Name(Username);
+                            game.setOpponentName(playerWaiting[3]);
                             game.saveInstanceState(bundle, getBaseContext());
                             Intent selection = new Intent(getBaseContext(), SelectionActivity.class);
                             selection.putExtra("gameId", playerWaiting[2]);
                             selection.putExtras(bundle);
                             startActivity(selection);
                         } else if (playerWaiting[1].equals("ready")) {
-                            // Player 1 created game
+                            // Player 1 created game and it is now ready
                             running = false;
-                            //game.setPlayer1Name(Username);
                             game.setLocalPlayer(Username);
                             game.setGameId(playerWaiting[2]);
+                            game.setOpponentName(playerWaiting[3]);
                             game.saveInstanceState(bundle, getBaseContext());
                             Intent selection = new Intent(getBaseContext(), SelectionActivity.class);
                             selection.putExtra("gameId", playerWaiting[2]);
                             selection.putExtras(bundle);
                             startActivity(selection);
                         } else if (playerWaiting[1].equals("create")) {
-                            // Game created
+                            // Player 1 created game
                             final TextView waitingText = (TextView) findViewById(R.id.textWaiting);
                             waitingText.post(new Runnable() {
                                 @Override

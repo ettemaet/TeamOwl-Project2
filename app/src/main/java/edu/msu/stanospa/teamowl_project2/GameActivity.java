@@ -36,6 +36,7 @@ public class GameActivity extends ActionBarActivity {
         }
         gId = getIntent().getStringExtra("gameId");
         gameView.setGameId(gId);
+        gameView.startTimer();
         TextView tv = (TextView)findViewById(R.id.placementText);
         tv.setText(getString(R.string.bird_placement_info) +
                 gameView.getGame().getCurrentPlayerName());
