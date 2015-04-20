@@ -35,27 +35,6 @@ public class Cloud {
     private static final String UTF8 = "UTF-8";
 
     /**
-     * Skip the XML parser to the end tag for whatever
-     * tag we are currently within.
-     * @param xml the parser
-     * @throws IOException
-     * @throws org.xmlpull.v1.XmlPullParserException
-     */
-    public static void skipToEndTag(XmlPullParser xml)
-            throws IOException, XmlPullParserException {
-        int tag;
-        do
-        {
-            tag = xml.next();
-            if(tag == XmlPullParser.START_TAG) {
-                // Recurse over any start tag
-                skipToEndTag(xml);
-            }
-        } while(tag != XmlPullParser.END_TAG &&
-                tag != XmlPullParser.END_DOCUMENT);
-    }
-
-    /**
      * Open a connection to a hatting in the cloud.
      * @param UserId the user name
      * @param PassWord the password send to the server
@@ -398,7 +377,7 @@ public class Cloud {
         nameValuePair.add(new BasicNameValuePair("birdid", Integer.toString(birdid)));
         nameValuePair.add(new BasicNameValuePair("x", Float.toString(x)));
         nameValuePair.add(new BasicNameValuePair("y", Float.toString(y)));
-        int gameoverI = -1;
+        int gameoverI;
         if(gameover)
             gameoverI = 1;
         else

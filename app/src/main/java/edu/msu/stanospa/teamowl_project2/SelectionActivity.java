@@ -264,7 +264,7 @@ public class SelectionActivity extends ActionBarActivity {
 
     public int checkPlayerTurn() {
         String result = cloud.GetCurTurn(game.getGameId(),game.GetToken());
-        String[] parsed = new String[3];
+        String[] parsed;
         parsed = result.split(",");
         if(parsed[0].equals("error")) {
             return 0;

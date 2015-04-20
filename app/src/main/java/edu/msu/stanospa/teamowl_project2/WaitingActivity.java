@@ -65,7 +65,7 @@ public class WaitingActivity extends ActionBarActivity {
                 //Check to see if player is waiting
                 Cloud cloud = new Cloud();
                 String[] playerWaiting = new String[2];
-                String result = "";
+                String result;
                 while (running) {
                     result = cloud.isPlayerWaiting(Userid);
 
