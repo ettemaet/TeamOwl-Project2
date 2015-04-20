@@ -91,7 +91,7 @@ public class SelectionActivity extends ActionBarActivity {
                         game.declareWinner();
                         Intent intent = new Intent(getBaseContext(), FinalScoreActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.putExtras(bundle);
+                        intent.putExtras(newBundle);
                         startActivity(intent);
                         finish();
                     }
