@@ -204,8 +204,6 @@ public class SelectionActivity extends ActionBarActivity {
                 game.saveInstanceState(newBundle, getBaseContext());
                 Cloud cloud = new Cloud();
                 cloud.ExitGame(gameId,game.GetToken());
-                Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                startActivity(intent);
             }
         }).start();
     }

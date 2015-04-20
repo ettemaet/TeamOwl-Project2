@@ -72,7 +72,9 @@ public class GameActivity extends ActionBarActivity {
                 gameView.getGame().saveInstanceState(newBundle, getBaseContext());
                 Cloud cloud = new Cloud();
                 cloud.ExitGame(gId,gameView.getGame().GetToken());
-                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                Intent intent = new Intent(getBaseContext(), FinalScoreActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtras(newBundle);
                 startActivity(intent);
             }
         }).start();
