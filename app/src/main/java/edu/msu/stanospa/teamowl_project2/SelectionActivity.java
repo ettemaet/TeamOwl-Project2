@@ -91,50 +91,52 @@ public class SelectionActivity extends ActionBarActivity {
                         game.declareWinner();
                         Intent intent = new Intent(getBaseContext(), FinalScoreActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.putExtras(bundle);
+                        intent.putExtras(newBundle);
                         startActivity(intent);
                         finish();
+                    } else {
+                        int serverTurn = Integer.parseInt(temp[1]);
+                        if(game.getLocalTurn() < serverTurn) {
+                            //load the bird from server
+                            String birdinfo = cloud.GetMovement(gameId,game.getLocalTurn());
+                            String[] result = birdinfo.split(",");
+                            if(!result[0].equals("yes"))
+                            {
+                                Log.i("getmovement","error");
+                                continue;
+                            }
+                            else
+                            {
+                                if(result[4].equals("1"))
+                                {
+                                    //raise winning condition;
+                                    game.declareWinner();
+                                    //go to win activity
+
+                                } else {
+                                    Bird serverBird = new Bird(getBaseContext(), Integer.parseInt(result[1]), Float.parseFloat(result[2])
+                                            , Float.parseFloat(result[3]));
+                                    game.AddBird(serverBird);
+                                }
+
+                            }
+                            //check if the other guy exit or dc
+                            //cloud.IsGameOver(gameId) {
+                            // goto final score and display opponent dc or exit
+                            //}
+                            //
+
+
+                            //inc the turn number
+                            game.AddLocalTurn();
+                            continue;
+                        }
                     }
-                    int serverTurn = Integer.parseInt(temp[1]);
                     //Log.i("player",""+player);
                     //if ((cloud.isMyTurn(game.getGameId(), Integer.toString(player))) && birdSelected) {
                     //Log.i("gameid, player, birdSelected", "values: " + gameId + Integer.toString(player) + birdSelected);
                     //Log.i("isMyTurn()", "value: " + cloud.isMyTurn(gameId, Integer.toString(player)));
-                    if(game.getLocalTurn() < serverTurn) {
-                        //load the bird from server
-                        String birdinfo = cloud.GetMovement(gameId,game.getLocalTurn());
-                        String[] result = birdinfo.split(",");
-                        if(!result[0].equals("yes"))
-                        {
-                            Log.i("getmovement","error");
-                            continue;
-                        }
-                        else
-                        {
-                            if(result[4].equals("1"))
-                            {
-                                //raise winning condition;
-                                game.declareWinner();
-                                //go to win activity
 
-                            } else {
-                                Bird serverBird = new Bird(getBaseContext(), Integer.parseInt(result[1]), Float.parseFloat(result[2])
-                                        , Float.parseFloat(result[3]));
-                                game.AddBird(serverBird);
-                            }
-
-                        }
-                        //check if the other guy exit or dc
-                        //cloud.IsGameOver(gameId) {
-                            // goto final score and display opponent dc or exit
-                        //}
-                        //
-
-
-                        //inc the turn number
-                        game.AddLocalTurn();
-                        continue;
-                    }
                     if ((cloud.isMyTurn(gameId, Integer.toString(player))) && birdSelected) {
                         Log.i("BIRD SELECTED IF: ", " Value" + birdSelected);
                         stillMyTurn = false;
