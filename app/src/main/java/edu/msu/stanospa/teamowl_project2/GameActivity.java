@@ -67,8 +67,8 @@ public class GameActivity extends ActionBarActivity {
             public void run() {
                 final Bundle newBundle = new Bundle();
                 //Toast.makeText(getBaseContext(), "Exiting Game", Toast.LENGTH_SHORT).show();
-                gameView.getGame().declareWinner();
                 gameView.getGame().iLost(true);
+                gameView.getGame().declareWinner();
                 gameView.getGame().saveInstanceState(newBundle, getBaseContext());
                 Cloud cloud = new Cloud();
                 cloud.ExitGame(gId,gameView.getGame().GetToken());
