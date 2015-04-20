@@ -133,6 +133,16 @@ public class Game implements Serializable {
 
     private String opponentName;
 
+    private String token;
+
+    public void SetToken(String Itoken) {
+        this.token = Itoken;
+    }
+
+    public String GetToken() {
+        return this.token;
+    }
+
     /**
      * Is there a bird currently being dragged
      */
