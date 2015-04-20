@@ -178,6 +178,10 @@ public class Game implements Serializable {
 
     private boolean timerRunning = false;
 
+    public void iLost(boolean didILose) {
+        this.didILose = true;
+    }
+
     private boolean didILose = false;
 
 

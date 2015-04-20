@@ -87,7 +87,7 @@ public class WaitingActivity extends ActionBarActivity {
                             game.setPlayerOne(false);
                             game.setOpponentName(playerWaiting[3]);
                             game.saveInstanceState(bundle, getBaseContext());
-                            game.SetToken(playerWaiting[5]);
+                            game.SetToken(playerWaiting[4]);
                             Intent selection = new Intent(getBaseContext(), SelectionActivity.class);
                             selection.putExtra("gameId", playerWaiting[2]);
                             selection.putExtras(bundle);
@@ -114,7 +114,7 @@ public class WaitingActivity extends ActionBarActivity {
                             });
                             game.setPlayerOne(true);
                             game.setGameId(playerWaiting[2]);
-                            game.SetToken(playerWaiting[4]);
+                            game.SetToken(playerWaiting[3]);
                             game.saveInstanceState(bundle, getBaseContext());
                             //checkWaitingStatus();
                         } else if (playerWaiting[1].equals("waiting")) {
