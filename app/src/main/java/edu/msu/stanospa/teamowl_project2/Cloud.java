@@ -262,14 +262,15 @@ public class Cloud {
 
     }
 
-    public String GetCurTurn(String gameid)
+    public String GetCurTurn(String gameid, String token)
     {
         HttpClient httpClient = new DefaultHttpClient();
 
         HttpPost httpPost = new HttpPost(GETTURNID_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
+        nameValuePair.add(new BasicNameValuePair("token", token));
         //Encoding POST data
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
@@ -325,15 +326,14 @@ public class Cloud {
 
 
     //player: expect 1 or 2
-    public String GetPlayerInfo(String gameid,String token, int player)
+    public String GetPlayerInfo(String gameid, int player)
     {
         HttpClient httpClient = new DefaultHttpClient();
 
         HttpPost httpPost = new HttpPost(GETPLAYERINFO_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
-        nameValuePair.add(new BasicNameValuePair("token", token));
         nameValuePair.add(new BasicNameValuePair("player", Integer.toString(player)));
 
         //Encoding POST data

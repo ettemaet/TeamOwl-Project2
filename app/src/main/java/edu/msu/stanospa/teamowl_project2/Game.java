@@ -319,8 +319,8 @@ public class Game implements Serializable {
                     public void run() {
 
                         Cloud cloud = new Cloud();
-                        localPlayer.getSelectedBird().saveToCloud(cloud, gameId, Integer.toString(curTurn),true);
-                        cloud.ExitGame(gameId);
+                        localPlayer.getSelectedBird().saveToCloud(cloud, gameId, Integer.toString(curTurn),true,token);
+                        cloud.ExitGame(gameId,token);
 
 
                     }
@@ -337,7 +337,7 @@ public class Game implements Serializable {
             public void run() {
 
                 Cloud cloud = new Cloud();
-                localPlayer.getSelectedBird().saveToCloud(cloud, gameId, Integer.toString(curTurn),false);
+                localPlayer.getSelectedBird().saveToCloud(cloud, gameId, Integer.toString(curTurn),false,token);
 
 
             }
