@@ -17,6 +17,8 @@ public class GameActivity extends ActionBarActivity {
 
     private String gId;
 
+    private String myToken = "";
+
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -33,6 +35,7 @@ public class GameActivity extends ActionBarActivity {
             gameView.setGame(game);
         }
         gId = getIntent().getStringExtra("gameId");
+        myToken = getIntent().getStringExtra("token");
         gameView.setGameId(gId);
         gameView.startTimer();
         TextView tv = (TextView)findViewById(R.id.placementText);
@@ -70,7 +73,7 @@ public class GameActivity extends ActionBarActivity {
                 gameView.getGame().declareWinner();
                 gameView.getGame().saveInstanceState(newBundle, getBaseContext());
                 Cloud cloud = new Cloud();
-                cloud.ExitGame(gId, gameView.getGame().GetToken());
+                cloud.ExitGame(gId, myToken);
                 Intent intent = new Intent(getBaseContext(), FinalScoreActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtras(newBundle);
@@ -101,6 +104,7 @@ public class GameActivity extends ActionBarActivity {
             Intent intent = new Intent(this, SelectionActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra("gameId", gId);
+            intent.putExtra("token", myToken);
             intent.putExtras(bundle);
             startActivity(intent);
             finish();

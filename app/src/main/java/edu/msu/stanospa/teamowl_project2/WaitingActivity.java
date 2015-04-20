@@ -60,6 +60,7 @@ public class WaitingActivity extends ActionBarActivity {
         new Thread(new Runnable() {
             public void run() {
                 Boolean running = true;
+                String myToken = "";
                 Bundle bundle = new Bundle();
                 game.saveInstanceState(bundle, getBaseContext());
                 //Check to see if player is waiting
@@ -82,9 +83,10 @@ public class WaitingActivity extends ActionBarActivity {
                             game.setLocalPlayer(Username);
                             game.setPlayerOne(false);
                             game.setOpponentName(playerWaiting[3]);
-                            game.saveInstanceState(bundle, getBaseContext());
                             game.SetToken(playerWaiting[4]);
+                            game.saveInstanceState(bundle, getBaseContext());
                             Intent selection = new Intent(getBaseContext(), SelectionActivity.class);
+                            selection.putExtra("token", playerWaiting[4]);
                             selection.putExtra("gameId", playerWaiting[2]);
                             selection.putExtras(bundle);
                             startActivity(selection);
@@ -97,6 +99,7 @@ public class WaitingActivity extends ActionBarActivity {
                             game.saveInstanceState(bundle, getBaseContext());
                             Intent selection = new Intent(getBaseContext(), SelectionActivity.class);
                             selection.putExtra("gameId", playerWaiting[2]);
+                            selection.putExtra("token", myToken);
                             selection.putExtras(bundle);
                             startActivity(selection);
                         } else if (playerWaiting[1].equals("create")) {
@@ -108,6 +111,7 @@ public class WaitingActivity extends ActionBarActivity {
                                     waitingText.setText(R.string.waiting_for_player);
                                 }
                             });
+                            myToken = playerWaiting[3];
                             game.setPlayerOne(true);
                             game.setGameId(playerWaiting[2]);
                             game.SetToken(playerWaiting[3]);

@@ -32,6 +32,8 @@ public class SelectionActivity extends ActionBarActivity {
 
     private String gameId = "";
 
+    private String myToken = "";
+
     /**
      * Local player - either 1 or 2
      */
@@ -67,6 +69,7 @@ public class SelectionActivity extends ActionBarActivity {
         setPlayerSelectionText();
 
         gameId = getIntent().getStringExtra("gameId");
+        myToken = getIntent().getStringExtra("token");
 
         final Context context = getApplicationContext();
         CharSequence noBirdText = "Please select a bird!";
@@ -88,7 +91,7 @@ public class SelectionActivity extends ActionBarActivity {
             public void run() {
 
                 while (stillMyTurn) {
-                    String[] temp = cloud.GetCurTurn(gameId,game.GetToken()).split(",");
+                    String[] temp = cloud.GetCurTurn(gameId,myToken).split(",");
                     if (temp[0].equals("gameover")) {
                         game.declareWinner();
                         game.saveInstanceState(newBundle, context);
@@ -103,7 +106,7 @@ public class SelectionActivity extends ActionBarActivity {
                         int serverTurn = Integer.parseInt(temp[1]);
                         if(game.getLocalTurn() < serverTurn) {
                             //load the bird from server
-                            String birdinfo = cloud.GetMovement(gameId,game.getLocalTurn(),game.GetToken());
+                            String birdinfo = cloud.GetMovement(gameId,game.getLocalTurn(),myToken);
                             String[] result = birdinfo.split(",");
                             if(!result[0].equals("yes"))
                             {
@@ -142,17 +145,18 @@ public class SelectionActivity extends ActionBarActivity {
                     //Log.i("gameid, player, birdSelected", "values: " + gameId + Integer.toString(player) + birdSelected);
                     //Log.i("isMyTurn()", "value: " + cloud.isMyTurn(gameId, Integer.toString(player)));
 
-                    if ((cloud.isMyTurn(gameId, Integer.toString(player),game.GetToken())) && birdSelected) {
+                    if ((cloud.isMyTurn(gameId, Integer.toString(player),myToken) && birdSelected)) {
                         Log.i("BIRD SELECTED IF: ", " Value" + birdSelected);
                         stillMyTurn = false;
                         game.saveInstanceState(newBundle, context);
                         Intent intent = new Intent(getBaseContext(), GameActivity.class);
                         intent.putExtra("gameId", gameId);
+                        intent.putExtra("token", myToken);
                         intent.putExtras(newBundle);
                         startActivity(intent);
                         finish();
                     //} else if ((cloud.isMyTurn(game.getGameId(), Integer.toString(player))) && !birdSelected) {
-                    } else if ((cloud.isMyTurn(gameId, Integer.toString(player),game.GetToken())) && !birdSelected) {
+                    } else if ((cloud.isMyTurn(gameId, Integer.toString(player),myToken)) && !birdSelected) {
                         setPlayerSelectionTextInThread();
                         Log.i("BIRD SELECTED IF ELSE: ", " Value" + birdSelected);
                         //Do nothing, is current player's turn but no bird is selected
@@ -205,7 +209,7 @@ public class SelectionActivity extends ActionBarActivity {
                 game.declareWinner();
                 game.saveInstanceState(newBundle, getBaseContext());
                 Cloud cloud = new Cloud();
-                cloud.ExitGame(gameId,game.GetToken());
+                cloud.ExitGame(gameId,myToken);
             }
         }).start();
     }
@@ -263,7 +267,7 @@ public class SelectionActivity extends ActionBarActivity {
     }
 
     public int checkPlayerTurn() {
-        String result = cloud.GetCurTurn(game.getGameId(),game.GetToken());
+        String result = cloud.GetCurTurn(game.getGameId(),myToken);
         String[] parsed;
         parsed = result.split(",");
         if(parsed[0].equals("error")) {
