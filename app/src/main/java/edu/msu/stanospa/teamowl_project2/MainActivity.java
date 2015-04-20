@@ -1,5 +1,6 @@
 package edu.msu.stanospa.teamowl_project2;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
     public void onCheckboxClicked(View view) {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
-        if (checked == true) {
+        if (checked) {
             username = ((EditText)findViewById(R.id.editUsername)).getText().toString();
             password = ((EditText)findViewById(R.id.editPassword)).getText().toString();
             writePreferences();
@@ -49,6 +50,7 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    @SuppressLint("CommitPrefEdits")
     private void writePreferences() {
         SharedPreferences settings = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();

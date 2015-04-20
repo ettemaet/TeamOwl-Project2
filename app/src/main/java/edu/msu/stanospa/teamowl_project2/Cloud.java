@@ -445,14 +445,7 @@ public class Cloud {
             xml.require(XmlPullParser.START_TAG, null, "place");
 
             String status = xml.getAttributeValue(null, "status");
-            if(status.equals("ok"))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return status.equals("ok");
             // We are done
         } catch(XmlPullParserException ex) {
             return false;
@@ -676,14 +669,7 @@ public class Cloud {
             xml.require(XmlPullParser.START_TAG, null, "turn");
 
             String status = xml.getAttributeValue(null, "status");
-            if(status.equals("dc"))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return status.equals("dc");
             // We are done
         } catch(XmlPullParserException ex) {
             return false;

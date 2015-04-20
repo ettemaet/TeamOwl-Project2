@@ -1,5 +1,6 @@
 package edu.msu.stanospa.teamowl_project2;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -44,6 +45,7 @@ public class SelectionActivity extends ActionBarActivity {
         game.saveInstanceState(bundle, this);
     }
 
+    @SuppressLint("ShowToast")
     @Override
     protected void onCreate(final Bundle bundle) {
         super.onCreate(bundle);
