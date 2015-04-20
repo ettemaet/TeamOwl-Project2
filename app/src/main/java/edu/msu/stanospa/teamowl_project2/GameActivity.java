@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class GameActivity extends ActionBarActivity {
@@ -67,11 +66,11 @@ public class GameActivity extends ActionBarActivity {
             public void run() {
                 final Bundle newBundle = new Bundle();
                 //Toast.makeText(getBaseContext(), "Exiting Game", Toast.LENGTH_SHORT).show();
-                gameView.getGame().iLost(true);
+                gameView.getGame().iLost();
                 gameView.getGame().declareWinner();
                 gameView.getGame().saveInstanceState(newBundle, getBaseContext());
                 Cloud cloud = new Cloud();
-                cloud.ExitGame(gId,gameView.getGame().GetToken());
+                cloud.ExitGame(gId, gameView.getGame().GetToken());
                 Intent intent = new Intent(getBaseContext(), FinalScoreActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtras(newBundle);

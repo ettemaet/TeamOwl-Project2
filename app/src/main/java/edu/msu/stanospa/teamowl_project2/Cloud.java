@@ -1,6 +1,5 @@
 package edu.msu.stanospa.teamowl_project2;
 
-import android.os.Debug;
 import android.util.Log;
 import android.util.Xml;
 
@@ -23,9 +22,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by leon on 4/8/15.
- */
 public class Cloud {
     private static final String REGISTER_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/register.php";
     private static final String LOGIN_URL = "http://webdev.cse.msu.edu/~gaojun1/cse476/project2/login.php";
@@ -72,7 +68,7 @@ public class Cloud {
 
         HttpPost httpPost = new HttpPost(LOGIN_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+        List<NameValuePair> nameValuePair = new ArrayList<>(2);
         nameValuePair.add(new BasicNameValuePair("user", UserId));
         nameValuePair.add(new BasicNameValuePair("pw", PassWord));
 
@@ -133,7 +129,7 @@ public class Cloud {
 
         HttpPost httpPost = new HttpPost(REGISTER_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
+        List<NameValuePair> nameValuePair = new ArrayList<>(3);
         nameValuePair.add(new BasicNameValuePair("user", UserId));
         nameValuePair.add(new BasicNameValuePair("pw", PassWord));
         nameValuePair.add(new BasicNameValuePair("pw1", PassWord1));
@@ -196,7 +192,7 @@ public class Cloud {
 
         HttpPost httpPost = new HttpPost(FINDGAME_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+        List<NameValuePair> nameValuePair = new ArrayList<>(1);
         nameValuePair.add(new BasicNameValuePair("userid", userid));
 
         //Encoding POST data
@@ -268,7 +264,7 @@ public class Cloud {
 
         HttpPost httpPost = new HttpPost(GETTURNID_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+        List<NameValuePair> nameValuePair = new ArrayList<>(2);
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
         nameValuePair.add(new BasicNameValuePair("token", token));
         //Encoding POST data
@@ -332,7 +328,7 @@ public class Cloud {
 
         HttpPost httpPost = new HttpPost(GETPLAYERINFO_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+        List<NameValuePair> nameValuePair = new ArrayList<>(2);
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
         nameValuePair.add(new BasicNameValuePair("player", Integer.toString(player)));
 
@@ -395,7 +391,7 @@ public class Cloud {
 
         HttpPost httpPost = new HttpPost(PLACEBIRD_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+        List<NameValuePair> nameValuePair = new ArrayList<>(1);
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
         nameValuePair.add(new BasicNameValuePair("token", token));
         nameValuePair.add(new BasicNameValuePair("turnnum", turnnum));
@@ -459,7 +455,7 @@ public class Cloud {
 
         HttpPost httpPost = new HttpPost(EXITDC_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+        List<NameValuePair> nameValuePair = new ArrayList<>(2);
         nameValuePair.add(new BasicNameValuePair("token", token));
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
 
@@ -495,7 +491,7 @@ public class Cloud {
 
         HttpPost httpPost = new HttpPost(ISMYTURN_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
+        List<NameValuePair> nameValuePair = new ArrayList<>(3);
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
         nameValuePair.add(new BasicNameValuePair("player", player));
         nameValuePair.add(new BasicNameValuePair("token", token));
@@ -560,7 +556,7 @@ public class Cloud {
 
         HttpPost httpPost = new HttpPost(GETMOVE_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
+        List<NameValuePair> nameValuePair = new ArrayList<>(3);
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
         nameValuePair.add(new BasicNameValuePair("token", token));
         nameValuePair.add(new BasicNameValuePair("turnnum", Integer.toString(turnnum)));
@@ -627,7 +623,7 @@ public class Cloud {
 
         HttpPost httpPost = new HttpPost(GETTURNID_URL);
 
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
+        List<NameValuePair> nameValuePair = new ArrayList<>(3);
         nameValuePair.add(new BasicNameValuePair("gameid", gameid));
         nameValuePair.add(new BasicNameValuePair("token", token));
         nameValuePair.add(new BasicNameValuePair("player", "1"));

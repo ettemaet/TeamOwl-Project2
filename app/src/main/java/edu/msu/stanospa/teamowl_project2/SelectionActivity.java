@@ -201,7 +201,7 @@ public class SelectionActivity extends ActionBarActivity {
             public void run() {
                 final Bundle newBundle = new Bundle();
                 //Toast.makeText(getBaseContext(), "Exiting Game", Toast.LENGTH_SHORT).show();
-                game.iLost(true);
+                game.iLost();
                 game.declareWinner();
                 game.saveInstanceState(newBundle, getBaseContext());
                 Cloud cloud = new Cloud();

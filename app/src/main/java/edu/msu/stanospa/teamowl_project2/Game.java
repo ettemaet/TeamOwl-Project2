@@ -12,7 +12,6 @@ import android.view.View;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Timer;
 
 public class Game implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -178,7 +177,7 @@ public class Game implements Serializable {
 
     private boolean timerRunning = false;
 
-    public void iLost(boolean didILose) {
+    public void iLost() {
         this.didILose = true;
     }
 
