@@ -24,7 +24,6 @@ public class GameActivity extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_game);
-
         gameView = (GameView)findViewById(R.id.gameView);
 
         if(bundle != null) {
@@ -66,7 +65,11 @@ public class GameActivity extends ActionBarActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(getBaseContext(), "Exiting Game", Toast.LENGTH_SHORT).show();
+                final Bundle newBundle = new Bundle();
+                //Toast.makeText(getBaseContext(), "Exiting Game", Toast.LENGTH_SHORT).show();
+                gameView.getGame().declareWinner();
+                gameView.getGame().iLost(true);
+                gameView.getGame().saveInstanceState(newBundle, getBaseContext());
                 Cloud cloud = new Cloud();
                 cloud.ExitGame(gId,gameView.getGame().GetToken());
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
